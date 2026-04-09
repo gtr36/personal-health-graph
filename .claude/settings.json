@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "vercel-vercel-plugin": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/amitjardosh/.cache/plugins/.install-staging/aa2a5e69366c90544bfb6d32c071523c9261a49b/claude-code/repo"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "vercel-plugin@vercel-vercel-plugin": true
+  }
+}

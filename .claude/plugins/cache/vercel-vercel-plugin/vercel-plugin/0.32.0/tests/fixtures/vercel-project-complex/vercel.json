@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    { "source": "/old", "destination": "/new" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://api.example.com/:path*" }
+  ],
+  "functions": {
+    "api/**": { "memory": 1024, "maxDuration": 30 }
+  },
+  "crons": [
+    { "path": "/api/cron/daily", "schedule": "0 8 * * *" }
+  ],
+  "buildCommand": "next build"
+}

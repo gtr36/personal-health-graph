@@ -1,0 +1,2 @@
+export VERCEL_PLUGIN_BOOTSTRAP_HINTS="greenfield"
+export VERCEL_PLUGIN_SETUP_MODE="1"

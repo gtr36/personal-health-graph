@@ -1,0 +1,33 @@
+{
+  "name": "vercel-plugin",
+  "version": "0.32.0",
+  "private": true,
+  "bin": {
+    "vercel-plugin": "src/cli/index.ts"
+  },
+  "scripts": {
+    "build:hooks": "tsup --config hooks/tsup.config.ts",
+    "build:manifest": "bun run scripts/build-manifest.ts",
+    "build:from-skills": "bun run scripts/build-from-skills.ts",
+    "build:skills": "bun run scripts/build-skills.ts",
+    "build:skills:check": "bun run scripts/build-skills.ts --check",
+    "build:from-skills:check": "bun run scripts/build-from-skills.ts --check",
+    "build": "bun run build:skills && bun run build:hooks && bun run build:manifest && bun run build:from-skills",
+    "validate": "bun run scripts/validate.ts",
+    "doctor": "bun run src/cli/index.ts doctor",
+    "typecheck": "tsc -p hooks/tsconfig.json --noEmit",
+    "test": "bun run typecheck && bun test",
+    "test:update-snapshots": "UPDATE_SNAPSHOTS=1 bun test tests/snapshot-runner.test.ts",
+    "playground:generate": "bun run .playground/generate-all.ts"
+  },
+  "devDependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.2.70",
+    "@types/node": "^25.3.5",
+    "@vercel/sandbox": "^1.8.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "minisearch": "^7.2.0"
+  }
+}

@@ -1,0 +1,1 @@
+export VERCEL_PLUGIN_BOOTSTRAP_HINTS="readme"

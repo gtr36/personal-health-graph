@@ -2,13 +2,13 @@
 schema_version: "0.3.0"
 created: 2026-04-08
 updated: 2026-08-14
-file_count: 126
+file_count: 130
 ---
 
 # Personal Health Graph — Manifest
 
 ## Schema Version
-Schema 0.3.0 · Template release 0.3.0 (August 2026). See CHANGELOG.md for release history and SCHEMA.md for version history and migration notes.
+Schema 0.3.0 · Template release 0.4.0 (August 2026). See CHANGELOG.md for release history and SCHEMA.md for version history and migration notes.
 
 ## File Index
 
@@ -72,6 +72,13 @@ Data from connected services, with README import guides in each directory.
 | integrations/nutrition/ | Macro tracking exports and dietary phase records | Summary |
 | integrations/raw/ | Full-resolution raw exports (JSON/CSV/PDF) | Archive |
 
+### Templates
+Fixed rendering assets used by skills.
+
+| File | Purpose |
+|------|---------|
+| templates/dashboard_shell.html | Self-contained HTML shell the DASHBOARD skill injects data into — all layout, styling, and rendering code; zero network requests |
+
 ### Sample
 Fictional demo patient for evaluation and onboarding.
 
@@ -113,6 +120,7 @@ Analysis methodology files that any LLM can execute against your data.
 | skills/FACT_AUDIT.md | Re-verify a prior report's load-bearing claims against primary sources |
 | skills/SPECIALIST_TRANSLATOR.md | Specialty-native handoff briefs with pertinent negatives and draft ICD-10 codes |
 | skills/TIMELINE.md | Rebuild TIMELINE.md from all dated events with lag annotations |
+| skills/DASHBOARD.md | Render the graph into a self-contained HTML dashboard via the fixed shell |
 
 ### Workflow Skills
 Multi-step automations that chain PHG analysis with external connectors.

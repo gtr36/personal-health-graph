@@ -80,3 +80,4 @@ Thumbs.db
 *.pem
 # Personal reference docs (not part of the public template)
 GITHUB_SETUP_GUIDE.md
+DESIGN_PROVENANCE.md

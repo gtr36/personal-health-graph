@@ -40,6 +40,7 @@ personal_health_graph/
 ├── TIMELINE.md             ← Derived chronological spine of all dated events
 │
 ├── sample/                 ← Fictional demo patient — try the system in 5 minutes
+├── templates/              ← Dashboard shell (self-contained HTML rendering)
 │
 ├── symptoms/               ← Monthly symptom logs (append-only)
 ├── journal/                ← Notes, patterns, hypotheses, voice memos, mood
@@ -82,6 +83,7 @@ personal_health_graph/
     ├── FACT_AUDIT.md       ← Re-verify a report's claims against source files
     ├── SPECIALIST_TRANSLATOR.md ← Specialty-native handoff briefs (ICD-10 tagged)
     ├── TIMELINE.md         ← Rebuild the chronological event spine
+    ├── DASHBOARD.md        ← Render the graph as a self-contained HTML page
     └── workflows/          ← Multi-step automations with external tools
         ├── MEETING_TO_PROTOCOL.md
         ├── PHYSICIAN_REPORT.md
@@ -255,6 +257,8 @@ The setup is the heavy part. After that, this is not a system you work on; it is
 **When you are curious whether something works:** design an experiment. The evaluation date arrives on its own schedule, with criteria you set before you started.
 
 **Quarterly and annually:** a supplement review each quarter, a risk assessment and health memo each year. Each one reads the last one, so the record compounds.
+
+**When you want to see it:** run DASHBOARD. One self-contained HTML page — your status, timeline, trends, regimen, and experiments — generated locally, opens from disk, makes zero network requests. Regenerate it whenever the data changes. (Curious what it looks like? Open `sample/dashboard.html` — the demo patient's rendered page ships with the repo.)
 
 ---
 

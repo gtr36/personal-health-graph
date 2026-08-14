@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F6F4EF">
+<title>Personal Health Graph — Dashboard</title>
+<!--
+  PHG DASHBOARD SHELL
+  A self-contained, read-only rendering of a Personal Health Graph.
+  - Zero network requests: no CDNs, no fonts fetched, no analytics, nothing.
+  - Generated artifact: the DASHBOARD skill injects data into PHG_DATA below
+    and saves the result to reports/. This file renders; it never edits.
+  - Empty-state tolerant: sections without data hide themselves and are
+    listed in the footer as "not yet tracked".
+
+  DESIGN RULES (all responsive/layout rules live here, in one place):
+  - Document, not app: single scrolling page, no navigation chrome, no inputs.
+  - The page body never scrolls horizontally; wide content (timeline, heatmap)
+    scrolls inside its own .scroll-x container.
+  - Phone widths: grids collapse (auto-fill minmax + the 480px media query),
+    verified at 375px and desktop.
+  - Light-only by design in this version: every surface carries functional
+    color coding (domain hues, tinted heatmap cells, range bands), which must
+    not be mechanically remapped. A designed warm-dark variant is future work.
+-->
+<style>
+  :root {
+    --bg-warm: #F6F4EF; --bg-card: #FDFBF7; --bg-white: #FFFFFF;
+    --fg-primary: #1A1918; --fg-secondary: #46443F; --fg-tertiary: #87847D; --fg-quaternary: #B3B0A9;
+    --border-soft: #E3E0D8; --border-faint: #EDEBE5;
+    --accent: #E0693C;
+    --d-cardio: #9E4848; --d-neuro: #5C4E78; --d-metab: #A87038; --d-inflam: #884030; --d-status: #4E6E50;
+    --d-cardio-mid: #B86868; --d-neuro-mid: #7868A0; --d-metab-mid: #C89058; --d-inflam-mid: #A86050; --d-status-mid: #6E8E70;
+    --d-cardio-light: rgba(158,72,72,0.08); --d-neuro-light: rgba(92,78,120,0.08); --d-metab-light: rgba(168,112,56,0.08);
+    --d-inflam-light: rgba(136,64,48,0.08); --d-status-light: rgba(78,110,80,0.08);
+    --radius: 12px; --radius-sm: 8px;
+    --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg-warm); color: var(--fg-secondary); font-family: var(--font-sans); font-weight: 400; line-height: 1.55; padding: 40px 24px 80px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1, h2, h3 { color: var(--fg-primary); font-weight: 500; }
+  h1 { font-size: 28px; letter-spacing: -0.01em; }
+  h2 { font-size: 17px; margin-bottom: 14px; }
+  .mono, .label { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 450; }
+  .label { font-size: 11px; color: var(--fg-tertiary); }
+  .card { background: var(--bg-card); border-radius: var(--radius); padding: 18px 20px; }
+  section { margin-top: 36px; }
+  .fictional-banner { background: var(--d-inflam-light); color: var(--d-inflam); border-radius: var(--radius-sm); padding: 10px 16px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 28px; display: none; }
+  header .meta-row { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 10px; }
+  header .meta-row span { font-family: var(--font-mono); font-size: 12px; color: var(--fg-tertiary); text-transform: uppercase; letter-spacing: 0.06em; }
+  .grid { display: grid; gap: 12px; }
+  .status-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .status-card .label { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex: none; }
+  .status-card .value { font-family: var(--font-mono); font-size: 24px; color: var(--fg-primary); margin-top: 8px; font-weight: 450; }
+  .status-card .value small { font-size: 12px; color: var(--fg-tertiary); margin-left: 4px; text-transform: none; letter-spacing: 0; }
+  .status-card .trend { font-family: var(--font-mono); font-size: 11px; margin-top: 4px; color: var(--fg-tertiary); }
+  .trend.up::before { content: "↑ "; } .trend.down::before { content: "↓ "; } .trend.flat::before { content: "→ "; }
+  .trend.watch { color: var(--d-inflam); } .trend.good { color: var(--d-status); }
+  .scroll-x { overflow-x: auto; }
+  .timeline-svg { display: block; min-width: 900px; }
+  .labs-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .lab-card .head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .lab-card .latest { font-family: var(--font-mono); font-size: 15px; color: var(--fg-primary); }
+  .lab-card .flag { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 20px; }
+  .flag.watch { background: var(--d-inflam-light); color: var(--d-inflam); }
+  .flag.low { background: var(--d-metab-light); color: var(--d-metab); }
+  .flag.ok { background: var(--d-status-light); color: var(--d-status); }
+  .two-col { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); align-items: start; }
+  .list-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-faint); }
+  .list-row:last-child { border-bottom: none; }
+  .list-row .name { color: var(--fg-primary); font-size: 14px; }
+  .list-row .sub { font-size: 12px; color: var(--fg-tertiary); }
+  .list-row .right { font-family: var(--font-mono); font-size: 11px; color: var(--fg-tertiary); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+  .chip { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 20px; background: var(--bg-warm); color: var(--fg-tertiary); white-space: nowrap; }
+  .chip.active { background: var(--d-status-light); color: var(--d-status); }
+  .chip.confirmed { background: var(--d-status-light); color: var(--d-status); }
+  .chip.refuted { background: var(--d-inflam-light); color: var(--d-inflam); }
+  .chip.note { background: var(--d-metab-light); color: var(--d-metab); }
+  .exp-card { margin-bottom: 12px; }
+  .exp-card .head { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .exp-card .detail { font-size: 13px; margin-top: 6px; }
+  .heat-table { border-collapse: collapse; width: 100%; }
+  .heat-table td, .heat-table th { padding: 6px 8px; font-size: 12px; text-align: center; }
+  .heat-table th { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-tertiary); font-weight: 450; }
+  .heat-table td.rowname { text-align: left; color: var(--fg-primary); font-size: 13px; white-space: nowrap; }
+  .heat-cell { border-radius: 6px; font-family: var(--font-mono); }
+  footer { margin-top: 48px; border-top: 1px solid var(--border-soft); padding-top: 20px; }
+  footer .fresh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px 24px; margin-top: 12px; }
+  footer .fresh-row { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--fg-tertiary); text-transform: uppercase; letter-spacing: 0.05em; }
+  footer .disclaimer { margin-top: 24px; font-size: 12px; color: var(--fg-quaternary); }
+  .empty-note { font-size: 13px; color: var(--fg-quaternary); }
+  @media (max-width: 480px) {
+    body { padding: 24px 14px 60px; }
+    h1 { font-size: 22px; }
+    .status-grid { grid-template-columns: repeat(2, 1fr); }
+    .labs-grid, .two-col { grid-template-columns: 1fr; }
+    .status-card .value { font-size: 20px; }
+    .card { padding: 14px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="fictional-banner" id="fictionalBanner">Fictional demo data — this is not a real person</div>
+
+  <header>
+    <div class="label">Personal Health Graph</div>
+    <h1 id="hdrName" style="margin-top:6px;"></h1>
+    <div class="meta-row">
+      <span id="hdrGenerated"></span>
+      <span id="hdrRange"></span>
+    </div>
+  </header>
+
+  <section id="secStatus"><div class="label" style="margin-bottom:12px;">Current status</div><div class="grid status-grid" id="statusGrid"></div></section>
+  <section id="secTimeline"><h2>Timeline</h2><div class="card scroll-x"><svg class="timeline-svg" id="timelineSvg" height="150"></svg></div></section>
+  <section id="secLabs"><h2>Lab trends</h2><div class="grid labs-grid" id="labsGrid"></div></section>
+  <section id="secRegimen"><h2>Regimen</h2><div class="grid two-col" id="regimenGrid"></div></section>
+  <section id="secExperiments"><h2>Experiments</h2><div id="expList"></div></section>
+  <section id="secSymptoms"><h2>Symptom frequency</h2><div class="card scroll-x"><table class="heat-table" id="heatTable"></table></div></section>
+  <section id="secExtras"><div class="grid two-col" id="extrasGrid"></div></section>
+
+  <footer>
+    <div class="label">Data freshness</div>
+    <div class="fresh-grid" id="freshGrid"></div>
+    <div class="empty-note" id="notTracked" style="margin-top:14px;"></div>
+    <div class="disclaimer">Generated locally from your Personal Health Graph. Not medical advice; review consequential findings with a clinician. This page makes no network requests.</div>
+  </footer>
+</div>
+
+<script>
+/* ================= PHG_DATA =================
+   The DASHBOARD skill replaces this object with real serialized data.
+   Schema documented in skills/DASHBOARD.md. Everything is optional;
+   missing sections hide themselves. */
+const PHG_DATA = {"meta":{"name":"","generated":"","range":"","fictional":false},
+  "status":[],"timeline":[],"labs":[],"medications":[],"supplements":[],
+  "experiments":[],"symptoms":null,"assessments":[],"vitals":null,"freshness":[]};
+/* =============== END PHG_DATA =============== */
+
+const D = PHG_DATA, domColor = d => ({cardio:"--d-cardio",neuro:"--d-neuro",metab:"--d-metab",inflam:"--d-inflam",status:"--d-status"}[d]||"--fg-tertiary");
+const cssVar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const el = (t,c,h) => { const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e; };
+const esc = s => String(s??"").replace(/[&<>"]/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const hide = id => document.getElementById(id).style.display="none";
+const notTracked = [];
+
+/* Header */
+if (D.meta) {
+  document.getElementById("hdrName").textContent = D.meta.name || "Health Dashboard";
+  document.getElementById("hdrGenerated").textContent = D.meta.generated ? "Generated " + D.meta.generated : "";
+  document.getElementById("hdrRange").textContent = D.meta.range ? "Data " + D.meta.range : "";
+  if (D.meta.fictional) document.getElementById("fictionalBanner").style.display = "block";
+  document.title = (D.meta.name ? D.meta.name + " — " : "") + "Health Dashboard";
+}
+
+/* Current status */
+if (D.status && D.status.length) {
+  const g = document.getElementById("statusGrid");
+  D.status.forEach(s => {
+    const c = el("div","card status-card");
+    c.appendChild(el("div","label",`<span class="dot" style="background:var(${domColor(s.domain)})"></span>${esc(s.label)}`));
+    c.appendChild(el("div","value",`${esc(s.value)}<small>${esc(s.unit||"")}</small>`));
+    if (s.trend || s.trendLabel) c.appendChild(el("div",`trend ${esc(s.trend||"")} ${esc(s.tone||"")}`,esc(s.trendLabel||s.trend||"")));
+    g.appendChild(c);
+  });
+} else { hide("secStatus"); }
+
+/* Timeline */
+if (D.timeline && D.timeline.length) {
+  const svg = document.getElementById("timelineSvg");
+  const evts = [...D.timeline].sort((a,b)=>a.date.localeCompare(b.date));
+  const t0 = new Date(evts[0].date).getTime(), t1 = new Date(evts[evts.length-1].date).getTime();
+  const W = Math.max(900, evts.length*58), H = 200, pad = 50, y = 96;
+  svg.setAttribute("width", W); svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const x = d => pad + ((new Date(d).getTime()-t0)/Math.max(1,(t1-t0)))*(W-2*pad);
+  let s = `<line x1="${pad}" y1="${y}" x2="${W-pad}" y2="${y}" stroke="${cssVar("--border-soft")}" stroke-width="1.5"/>`;
+  const startYr = new Date(evts[0].date).getFullYear(), endYr = new Date(evts[evts.length-1].date).getFullYear();
+  for (let yr=startYr; yr<=endYr+1; yr++) { const t=new Date(yr+"-01-01").getTime(); if(t>=t0&&t<=t1){ const xx=pad+((t-t0)/Math.max(1,(t1-t0)))*(W-2*pad);
+    s += `<line x1="${xx}" y1="${y-8}" x2="${xx}" y2="${y+8}" stroke="${cssVar("--border-soft")}"/><text x="${xx}" y="${H-8}" font-family="var(--font-mono)" font-size="10" fill="${cssVar("--fg-quaternary")}" text-anchor="middle">${yr}</text>`; } }
+  /* Four label levels (two above, two below) so date-dense clusters don't collide */
+  const LVL = [[-34,-45,-22],[44,55,22],[-64,-75,-52],[74,85,52]];
+  evts.forEach((e,i) => { const xx = x(e.date), o = LVL[i%4], ty=y+o[0], dy=y+o[1], ly=y+o[2];
+    s += `<line x1="${xx}" y1="${y}" x2="${xx}" y2="${ly}" stroke="${cssVar("--border-faint")}"/>`;
+    s += `<circle cx="${xx}" cy="${y}" r="4.5" fill="${cssVar(domColor(e.domain))}"><title>${esc(e.date)} — ${esc(e.label)}</title></circle>`;
+    s += `<text x="${xx}" y="${ty}" font-family="var(--font-mono)" font-size="9" fill="${cssVar("--fg-tertiary")}" text-anchor="middle">${esc((e.label||"").slice(0,17))}</text>`;
+    s += `<text x="${xx}" y="${dy}" font-family="var(--font-mono)" font-size="8.5" fill="${cssVar("--fg-quaternary")}" text-anchor="middle">${esc(e.date.slice(2))}</text>`; });
+  svg.innerHTML = s;
+} else { hide("secTimeline"); notTracked.push("timeline"); }
+
+/* Lab trend sparklines */
+function sparkline(points, range, color, W=210, H=54) {
+  const vals = points.map(p=>p.value);
+  let lo = Math.min(...vals), hi = Math.max(...vals);
+  if (range) { lo = Math.min(lo, range.low ?? lo); hi = Math.max(hi, range.high ?? hi); }
+  const span = (hi-lo)||1; lo -= span*0.15; hi += span*0.15;
+  const X = i => 8 + i*(W-16)/Math.max(1,points.length-1);
+  const Y = v => H-10 - ((v-lo)/(hi-lo))*(H-20);
+  let s = "";
+  if (range && range.low!=null && range.high!=null)
+    s += `<rect x="0" y="${Y(range.high)}" width="${W}" height="${Math.max(2,Y(range.low)-Y(range.high))}" fill="${cssVar("--d-status-light")}"/>`;
+  if (points.length>1) s += `<polyline points="${points.map((p,i)=>X(i)+","+Y(p.value)).join(" ")}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round"/>`;
+  points.forEach((p,i)=>{ s += `<circle cx="${X(i)}" cy="${Y(p.value)}" r="3" fill="${color}"><title>${esc(p.date)}: ${esc(p.value)}</title></circle>`; });
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="max-width:100%;">${s}</svg>`;
+}
+if (D.labs && D.labs.length) {
+  const g = document.getElementById("labsGrid");
+  D.labs.forEach(l => {
+    const c = el("div","card lab-card"), last = l.points[l.points.length-1];
+    const flagCls = l.flag==="watch"?"watch":(l.flag==="low"?"low":"ok");
+    c.appendChild(el("div","head",`<span class="label"><span class="dot" style="background:var(${domColor(l.domain)})"></span> ${esc(l.name)}</span>`+(l.flag?`<span class="flag ${flagCls}">${esc(l.flagLabel||l.flag)}</span>`:"")));
+    c.appendChild(el("div","latest",`${esc(last.value)} <small style="color:var(--fg-tertiary);font-size:11px;">${esc(l.unit||"")} · ${esc(last.date)}</small>`));
+    c.appendChild(el("div","",sparkline(l.points,l.range,cssVar(domColor(l.domain)+"-mid"))));
+    if (l.note) c.appendChild(el("div","sub",esc(l.note)));
+    g.appendChild(c);
+  });
+} else { hide("secLabs"); notTracked.push("labs"); }
+
+/* Regimen: medications + supplements */
+if ((D.medications&&D.medications.length)||(D.supplements&&D.supplements.length)) {
+  const g = document.getElementById("regimenGrid");
+  const mk = (title, rows) => { const c = el("div","card"); c.appendChild(el("div","label",title));
+    rows.forEach(r => { const row = el("div","list-row");
+      row.appendChild(el("div","",`<div class="name">${esc(r.name)}</div><div class="sub">${esc(r.sub||"")}</div>`));
+      row.appendChild(el("div","right", r.chip?`<span class="chip ${esc(r.chipTone||"")}">${esc(r.chip)}</span>`:esc(r.right||"")));
+      c.appendChild(row); });
+    return c; };
+  if (D.medications&&D.medications.length) g.appendChild(mk("Medications", D.medications));
+  if (D.supplements&&D.supplements.length) g.appendChild(mk("Supplements", D.supplements));
+} else { hide("secRegimen"); notTracked.push("regimen"); }
+
+/* Experiments */
+if (D.experiments && D.experiments.length) {
+  const g = document.getElementById("expList");
+  D.experiments.forEach(x => { const c = el("div","card exp-card");
+    c.appendChild(el("div","head",`<span class="name" style="color:var(--fg-primary);">${esc(x.id?x.id+" · ":"")}${esc(x.name)}</span><span class="chip ${esc(x.status)}">${esc(x.statusLabel||x.status)}</span>`));
+    c.appendChild(el("div","detail",esc(x.detail||"")));
+    g.appendChild(c); });
+} else { hide("secExperiments"); notTracked.push("experiments"); }
+
+/* Symptom heatmap */
+if (D.symptoms && D.symptoms.types && D.symptoms.types.length) {
+  const t = document.getElementById("heatTable"), months = D.symptoms.months;
+  t.appendChild(el("tr","", "<th></th>"+months.map(m=>`<th>${esc(m)}</th>`).join("")));
+  D.symptoms.types.forEach(ty => { const max = Math.max(1,...ty.counts);
+    const cells = ty.counts.map(n => { const a = n? (0.10+0.55*(n/max)).toFixed(2) : 0;
+      const base = cssVar(domColor(ty.domain));
+      return `<td><div class="heat-cell" style="background:${n?hexA(base,a):"transparent"};color:${n?cssVar("--fg-primary"):cssVar("--fg-quaternary")};padding:5px 0;">${n||"·"}</div></td>`; }).join("");
+    t.appendChild(el("tr","",`<td class="rowname"><span class="dot" style="background:var(${domColor(ty.domain)});margin-right:7px;"></span>${esc(ty.name)}</td>`+cells)); });
+} else { hide("secSymptoms"); notTracked.push("symptoms"); }
+function hexA(hex,a){ const h=hex.replace("#",""); const n=parseInt(h,16); return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`; }
+
+/* Extras: assessments + vitals */
+{ const g = document.getElementById("extrasGrid"); let any=false;
+  if (D.assessments && D.assessments.length) { any=true;
+    D.assessments.forEach(a => { const c = el("div","card");
+      c.appendChild(el("div","label",`<span class="dot" style="background:var(--d-neuro)"></span> ${esc(a.name)}`));
+      const last=a.points[a.points.length-1];
+      c.appendChild(el("div","latest",`<span style="font-family:var(--font-mono);font-size:22px;color:var(--fg-primary);">${esc(last.score)}</span> <small style="color:var(--fg-tertiary);font-size:11px;">${esc(last.band||"")} · ${esc(last.date)}</small>`));
+      c.appendChild(el("div","",sparkline(a.points.map(p=>({date:p.date,value:p.score})),null,cssVar("--d-neuro-mid"))));
+      g.appendChild(c); }); }
+  if (D.vitals && D.vitals.bp && D.vitals.bp.length) { any=true;
+    const c = el("div","card");
+    c.appendChild(el("div","label",`<span class="dot" style="background:var(--d-cardio)"></span> Blood pressure (home)`));
+    const last = D.vitals.bp[D.vitals.bp.length-1];
+    c.appendChild(el("div","latest",`<span style="font-family:var(--font-mono);font-size:22px;color:var(--fg-primary);">${esc(last.sys)}/${esc(last.dia)}</span> <small style="color:var(--fg-tertiary);font-size:11px;">mmHg · ${esc(last.date)}</small>`));
+    c.appendChild(el("div","",sparkline(D.vitals.bp.map(p=>({date:p.date,value:p.sys})),null,cssVar("--d-cardio-mid"))));
+    c.appendChild(el("div","sub","Systolic trend shown; hover points for dates."));
+    g.appendChild(c); }
+  if (!any) hide("secExtras"); }
+
+/* Freshness footer */
+if (D.freshness && D.freshness.length) {
+  const g = document.getElementById("freshGrid");
+  D.freshness.forEach(f => g.appendChild(el("div","fresh-row",`<span>${esc(f.source)}</span><span>${esc(f.last)}</span>`)));
+}
+if (notTracked.length) document.getElementById("notTracked").textContent = "Not yet tracked: " + notTracked.join(", ") + ".";
+</script>
+</body>
+</html>

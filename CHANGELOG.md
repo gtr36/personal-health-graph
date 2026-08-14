@@ -2,11 +2,19 @@
 
 All notable changes to the Personal Health Graph template. The `schema_version` in file frontmatter tracks the data schema; releases here track the template as a whole.
 
-## [Unreleased]
+## [0.4.0] — 2026-08-14
+
+The visual release: the graph gets a face, without becoming an app.
 
 ### Added
-- PHILOSOPHY.md: why the project exists, the beliefs behind it, and the list of things it will never do
-- README "What living with it looks like": the day-to-day rhythm of an established graph
+- **skills/DASHBOARD.md + templates/dashboard_shell.html** — render the graph into a single self-contained HTML dashboard: current status with trends, the timeline, moving lab trends with reference bands, the active regimen, experiments, symptom frequency, and data freshness. The shell is fixed and versioned (all layout and rendering code); the skill only serializes data into it, so every dashboard from every model looks the same. Zero network requests, opens from disk, verified at phone and desktop widths. Read-only by hard rule: the dashboard renders, it never edits, and it is regenerated rather than maintained.
+- **sample/dashboard.html** — the demo patient's rendered page, shipped with the repo so anyone can see the output before running anything.
+- **PHILOSOPHY.md** — why the project exists, the beliefs behind it, and the list of things it will never do.
+- **README "What living with it looks like"** — the day-to-day rhythm of an established graph.
+
+### Notes
+- The dashboard is a document, not an app: no navigation chrome, no inputs, light-only in this version (every surface carries functional color coding, which a mechanical dark remap would break; a designed dark variant is future work).
+- The dashboard artifact contains a person's full health picture in one shareable file. It saves to reports/, which is gitignored, and the README's sharing guidance applies to it fully.
 
 ## [0.3.0] — 2026-08-14
 

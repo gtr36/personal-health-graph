@@ -232,6 +232,8 @@ personal_health_graph/
 ├── TIMELINE.md
 │
 ├── sample/               (fictional demo patient with answer key — try before importing)
+├── templates/
+│   └── dashboard_shell.html  (fixed rendering shell for the DASHBOARD skill)
 │
 ├── symptoms/
 │   └── _TEMPLATE.md      (copy and rename to YYYY-MM.md)
@@ -295,6 +297,7 @@ personal_health_graph/
     ├── FACT_AUDIT.md
     ├── SPECIALIST_TRANSLATOR.md
     ├── TIMELINE.md
+    ├── DASHBOARD.md
     └── workflows/
         ├── MEETING_TO_PROTOCOL.md
         ├── PHYSICIAN_REPORT.md

@@ -27,6 +27,7 @@ Every time you run a skill (SUPPLEMENT_REVIEW, RISK_ASSESSMENT, HEALTH_MEMO, etc
 | EXPERIMENT | `experiment_[name]_YYYY-MM-DD` | .md | N-of-1 evaluation: result vs pre-committed criterion, verdict, decision |
 | FACT_AUDIT | `fact_audit_YYYY-MM-DD` | .md | Claim-by-claim re-verification of a prior report against primary sources |
 | SPECIALIST_TRANSLATOR | `specialist_brief_[specialty]_YYYY-MM-DD` | .md, .docx | Specialty-native handoff brief with pertinent negatives and draft codes |
+| DASHBOARD | `dashboard_YYYY-MM-DD` | .html | Self-contained visual overview: status, timeline, trends, regimen, experiments |
 
 **Workflow skill outputs:**
 

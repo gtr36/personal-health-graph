@@ -30,6 +30,7 @@ Skills are in `skills/*.md` and `skills/workflows/*.md`. To run a skill, read th
 - `skills/FACT_AUDIT.md` — re-verify a prior report's claims against primary sources
 - `skills/SPECIALIST_TRANSLATOR.md` — specialty-native handoff briefs
 - `skills/TIMELINE.md` — rebuild TIMELINE.md, the derived chronological event spine
+- `skills/DASHBOARD.md` — render the graph into a self-contained HTML dashboard (injects data into `templates/dashboard_shell.html`; never edit the shell's markup or add external resources)
 
 **Demo data:** `sample/` contains a fully populated fictional patient (Sam Rivera) with planted findings documented in `sample/ANSWER_KEY.md`. Use it to demo skills or benchmark analysis quality. Never mix sample data into a real user's graph.
 

@@ -195,7 +195,9 @@ Now that we have health data flowing, capture routines:
 - Analyze the raw file directly using the methodology in MASTER_ANALYSIS Phase 2
 - Query all 12 categories in GENETICS.md
 - Determine APOE haplotype, pharmacogenomic star alleles, HFE status
+- Record the verbatim raw-file line for every rsID written to GENETICS.md, and state strand convention and reference-vs-alternate allele for each call (per the instructions in GENETICS.md) — mark anything unconfirmable as unverified rather than interpreting it
 - Write to GENETICS.md and create integration summary in `integrations/genetics/`
+- Recommend running FACT_AUDIT's foundation mode (ideally with a second model) before the first MASTER_ANALYSIS treats these calls as solid
 
 **If only platform summary available:**
 - Extract key findings from the platform report

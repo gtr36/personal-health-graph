@@ -18,11 +18,21 @@ BUILDING THIS FILE:
 1. Get your raw genetic data file (see integrations/genetics/README.md for export instructions)
 2. Give the raw file to an LLM with the analysis prompt below
 3. Structure the results into the sections in this file
+4. For every rsID you enter, record the VERBATIM line from the raw file (in the row's
+   Actionable Implications cell or the Verification Log below). This single habit turns
+   every future audit into a lookup instead of a re-parse of a 600K-line file.
+5. Before treating this file as analysis-grade, run the FACT_AUDIT skill's foundation mode,
+   ideally with a different model than the one that populated it. A single misread genotype
+   here propagates into every downstream analysis while looking perfectly coherent.
 
 AI ANALYSIS PROMPT:
 "Analyze this raw genetic data file. For each section below, query the relevant rsIDs, report
 the genotype found, and provide clinical significance and actionable implications. If an rsID
-is not present in the file, note it as 'not genotyped.' Report on the plus (+) strand."
+is not present in the file, note it as 'not genotyped.' Report on the plus (+) strand.
+For every rsID found, include the verbatim line from the raw file. Before calling any
+genotype's zygosity or clinical meaning, state which allele is reference and which is
+alternate at that position and the platform's strand convention; if you cannot confirm
+reference vs alternate, mark the call 'unverified' rather than interpreting it."
 
 IMPORTANT NOTES:
 - Consumer genotyping (23andMe, Ancestry) tests ~630K-700K specific SNPs, not your full genome.
@@ -32,6 +42,9 @@ IMPORTANT NOTES:
   making medical decisions.
 - Star allele determinations (CYP2D6, CYP2C19, etc.) require checking multiple defining SNPs
   and should be verified against PharmVar (pharmvar.org).
+- Coherence is not correctness. An interpretation that reads consistently across this file
+  can still rest on one misread call. The Verification Log below is what separates
+  "entered" from "verified" — treat unverified rows as provisional.
 -->
 
 ## Platform Info
@@ -191,10 +204,20 @@ confirms suboptimal levels despite dietary intake → Preformed omega-3 suppleme
 
 ---
 
-## Verification Notes
+## Verification Log
+
 <!--
-Track what you've verified and what still needs checking.
-- Which rsIDs were manually verified against the raw file?
-- Any discrepancies between platform report and raw data?
-- Any variants that should be confirmed by clinical testing?
+This log is what separates "entered" from "verified." FACT_AUDIT's foundation mode appends
+entries here; manual verification passes should too. Rows without a covering log entry are
+provisional.
+
+ENTRY TEMPLATE — one per verification pass:
+
+### YYYY-MM-DD — [full | partial] — [method and model, e.g., "FACT_AUDIT foundation mode, (model name)"]
+- **Rows verified:** N of M populated rows (list rsIDs re-derived from the raw file this pass)
+- **Verbatim lines recorded:** [yes / added for: list]
+- **Discrepancies:** [none | per row: rsID, recorded value vs raw-file value, resolution and date]
+- **Unverifiable:** [rows whose rsID is absent from the raw file, or whose ref/alt allele could not be confirmed]
+- **Clinical confirmation still needed:** [variants that should be confirmed by clinical-grade testing before informing decisions]
+- **Next verification due:** [date or trigger, e.g., "after next raw-file import" / "annual re-interpretation"]
 -->

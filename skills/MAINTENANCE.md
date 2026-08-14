@@ -102,6 +102,11 @@ Check that cross-references between files are consistent:
 - Run the EXPERIMENT skill's status-check mode: any active experiment past its evaluation date is overdue — flag it for evaluation
 - Any hypothesis flagged as "suggested test" in a recent analysis report with no corresponding experiment → surface as a candidate for design
 
+**2G: Foundation verification status**
+- When did the last FACT_AUDIT foundation pass run? (Check the Verification Logs in GENETICS.md and LABS_HISTORY.md.)
+- Flag: GENETICS.md populated but never verified; bulk INTAKE runs since the last foundation audit; INTAKE "verification needed" items older than 30 days; genetics verification older than 12 months (re-verification, and separately annual re-interpretation — the genotype doesn't change, but the research about it does)
+- Flag: flagged lab values without a ✓ verification mark — these drive decisions and deserve verification first
+
 ### Phase 3: Data Completeness Check
 
 Compare current state against the BASELINE_REPORT data completeness framework:

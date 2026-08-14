@@ -29,6 +29,18 @@ TIPS:
 - Flag column: H = high, L = low, blank = within range
 - Always record the reference range — it varies between labs
 - Note the source (provider/lab) since ranges differ between Quest, LabCorp, Function Health, etc.
+
+VERIFICATION:
+Values written by an AI from PDFs, CSVs, or portal exports are UNVERIFIED until checked
+against the source document — transcription errors at this step silently poison every
+downstream analysis while looking coherent.
+- Convention: append ✓ to a value once it has been confirmed against the original document
+  (value, unit, reference range, AND draw date), either manually or by a FACT_AUDIT
+  foundation-mode pass. Unverified flagged values deserve verification first.
+- Every unit conversion should be re-derived from the original, not trusted from memory.
+- Resolve INTAKE's "verification needed" items promptly — they are this file's known
+  weak points, and MAINTENANCE flags them if they age.
+- Log verification passes in the Verification Log at the bottom of this file.
 -->
 
 ## Draw Dates
@@ -169,4 +181,16 @@ Example:
 - **Transferrin saturation 55% (Feb 2026):** Consistent with HFE H63D heterozygous status.
   Not pathological at current ferritin level, but warrants monitoring.
   Linked: GENETICS.md (HFE H63D), PROFILE.md (no hemochromatosis diagnosis).
+-->
+
+## Verification Log
+
+<!--
+One entry per verification pass (manual or FACT_AUDIT foundation mode):
+
+### YYYY-MM-DD — [full | flagged rows + sample] — [method and model]
+- **Rows verified:** N (✓ applied) against [panel files / raw PDFs]
+- **Discrepancies:** [none | per row: biomarker, date, recorded vs source value, resolution]
+- **Unverifiable:** [rows with no panel file or raw document behind them]
+- **Next verification due:** [after next intake / date]
 -->

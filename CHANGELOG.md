@@ -6,6 +6,13 @@ All notable changes to the Personal Health Graph template. The `schema_version` 
 
 ### Added
 - README "If you're building a health company": the builders' section — MIT commercial use, where differentiation actually lives (novel data collection, novel interpretation, novel interventions), the export-path trust norm, and the upstream-contribution norm
+- **Verification hardening pass** — the ingestion layer gets the same rigor as the analysis layer:
+  - FACT_AUDIT gains **foundation mode**: audits the graph itself, not just reports — every GENETICS row re-derived from the verbatim raw-file line (strand convention and reference-vs-alternate allele confirmed, star alleles re-checked per defining SNP), every lab row verified against panel files and raw documents, regimen entries against their sources. Corrections are proposed, never silently applied.
+  - GENETICS.md: the verbatim-line convention (every entered rsID records the raw file's actual line), a strengthened AI analysis prompt that refuses to interpret unconfirmable calls, and a structured Verification Log replacing freeform notes
+  - LABS_HISTORY.md: verification convention (✓ marks for source-confirmed values) and its own Verification Log
+  - QUICKSTART's genetics step and the genetics integration README inherit the protocol, so onboarding never writes unverified foundation data silently
+  - MAINTENANCE 2G tracks foundation-audit recency, aging intake verification items, unverified flagged labs, and the annual genetics re-verification and re-interpretation cadence
+  - README Failure Modes updated to describe the full verification chain
 
 ## [0.4.0] — 2026-08-14
 

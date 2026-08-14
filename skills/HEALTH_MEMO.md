@@ -6,6 +6,7 @@ description: Amazon-style 6-pager health briefing. Narrative synthesis of all he
 reads:
   - reports/health_memo_*.md (prior memos, for tracking what changed)
   - PROFILE.md
+  - MEDICATIONS.md
   - LABS_HISTORY.md
   - GENETICS.md
   - SUPPLEMENTS.md
@@ -20,6 +21,9 @@ reads:
   - integrations/imaging/*.md
   - integrations/assessments/*.md
   - integrations/cycle/*.md
+  - integrations/vitals/*.md
+  - integrations/cgm/*.md
+  - integrations/nutrition/*.md
   - DOCTOR_QS.md
   - EXPENSES.md
 default_range: all available data

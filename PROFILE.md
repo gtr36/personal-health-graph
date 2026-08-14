@@ -1,5 +1,5 @@
 ---
-schema_version: "0.1.0"
+schema_version: "0.2.0"
 type: state
 created:    # YYYY-MM-DDTHH:MM:SS±HH:MM
 updated:    # YYYY-MM-DDTHH:MM:SS±HH:MM
@@ -28,9 +28,9 @@ tags: [profile, demographics, conditions, medications, providers]
 - None known
 
 ## Active Medications
-<!-- Include dose, frequency, prescribing provider, and start date. -->
-<!-- Example: Lisinopril 10mg daily (Dr. Jones, started 2024-03) -->
-- None
+<!-- Full detail lives in MEDICATIONS.md: doses, prescribers, indications, start/stop history, -->
+<!-- PGx notes, and interactions. Keep this as a quick-reference pointer. -->
+- See MEDICATIONS.md
 
 ## Active Supplements
 <!-- Brief list here for quick reference. Full detail lives in SUPPLEMENTS.md. -->
@@ -89,6 +89,14 @@ tags: [profile, demographics, conditions, medications, providers]
 - **Conditions:** <!-- myopia, astigmatism, dry eye, glaucoma risk, etc. -->
 - **Significant history:** <!-- LASIK, cataract surgery, retinal issues, etc. -->
 - **Notes:** <!-- screen time habits, blue light management, etc. -->
+
+## Hearing Health
+- **Audiologist/ENT:**
+- **Last hearing test:**
+- **Conditions:** <!-- hearing loss, tinnitus, frequent ear infections, etc. -->
+- **Devices:** <!-- hearing aids, custom ear protection, or N/A -->
+- **Noise exposure:** <!-- occupational, recreational (concerts, shooting, motorcycles), headphone habits -->
+- **Notes:** <!-- HealthKit noise-exposure data lives in integrations/healthkit/ if tracked -->
 
 ## Vaccination Record
 <!-- Core immunization history. Keep this updated for travel, provider visits, and public health context. -->

@@ -5,6 +5,7 @@ name: Doctor Prep
 description: Compile a structured visit summary from recent entries, flag anomalies, prepare queued questions, and format for physician review.
 reads:
   - PROFILE.md
+  - MEDICATIONS.md
   - SUPPLEMENTS.md
   - GENETICS.md
   - LABS_HISTORY.md
@@ -13,6 +14,7 @@ reads:
   - journal/*.md
   - integrations/labs/*.md
   - integrations/wearable_daily/*.md
+  - integrations/vitals/*.md
   - integrations/imaging/*.md
   # Voice-captured entries are in journal/*.md with source: voice
 default_range: 90 days (or since last visit, whichever is shorter)

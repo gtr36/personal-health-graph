@@ -5,6 +5,7 @@ name: Risk Assessment
 description: Risk factor review using established medical frameworks (ASCVD, Framingham, polygenic risk) as analytical scaffolding. Maps genetic predispositions against lab trends and lifestyle factors to produce a structured risk profile for discussion with your physician.
 reads:
   - PROFILE.md
+  - MEDICATIONS.md
   - LABS_HISTORY.md
   - GENETICS.md
   - SUPPLEMENTS.md
@@ -12,6 +13,7 @@ reads:
   - integrations/labs/*.md
   - integrations/genetics/*.md
   - integrations/wearable_daily/*.md
+  - integrations/vitals/*.md
   - integrations/imaging/*.md
 external_context:
   - ASCVD Risk Calculator (Pooled Cohort Equations)
@@ -53,7 +55,7 @@ Produce a structured risk profile using validated clinical risk frameworks along
 Extract from available data:
 - Age, sex, race/ethnicity
 - Total cholesterol, LDL-C, HDL-C (most recent values with dates)
-- Systolic blood pressure (most recent, or ask user if not documented)
+- Systolic blood pressure (prefer the trend from integrations/vitals/ over a single reading; ask the user only if nothing is documented)
 - Blood pressure medication status
 - Diabetes status (check HbA1c if available: < 5.7% normal, 5.7-6.4% prediabetic, ≥ 6.5% diabetic)
 - Smoking status

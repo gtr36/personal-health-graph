@@ -18,6 +18,9 @@ raw/
 ├── dental/         ← Dental x-rays, periodontal charts, treatment records
 ├── vision/         ← Eye exam reports, OCT scans, prescriptions
 ├── cycle/          ← Cycle tracking app exports, fertility records
+├── vitals/         ← BP monitor exports, scale data, ECG PDFs
+├── cgm/            ← Dexcom Clarity, LibreView, Levels exports
+├── nutrition/      ← Cronometer, MyFitnessPal daily exports
 ├── billing/        ← EOBs, itemized bills, HSA/FSA records
 ├── environmental/  ← Water quality, mold, air quality, heavy metal reports
 └── other/          ← Anything that doesn't fit above

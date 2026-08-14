@@ -1,14 +1,14 @@
 ---
-schema_version: "0.1.0"
+schema_version: "0.2.0"
 created: 2026-04-08
 updated: 2026-08-14
-file_count: 76
+file_count: 83
 ---
 
 # Personal Health Graph — Manifest
 
 ## Schema Version
-Schema 0.1.0 · Template release 0.1.1 (August 2026). See CHANGELOG.md for release history.
+Schema 0.2.0 · Template release 0.2.0 (August 2026). See CHANGELOG.md for release history and SCHEMA.md for the migration note.
 
 ## File Index
 
@@ -34,7 +34,8 @@ Files representing current truth. Modified in place when state changes.
 
 | File | Purpose |
 |------|---------|
-| PROFILE.md | Demographics, conditions, allergies, medications, providers, goals |
+| PROFILE.md | Demographics, conditions, allergies, providers, goals (medications pointer) |
+| MEDICATIONS.md | Active, PRN, and discontinued medications with prescribers, indications, PGx notes, interactions |
 | SUPPLEMENTS.md | Active stack with doses, timing, brands, rationale, genetic/lab citations |
 | PROTOCOLS.md | Routines, exercise, nutrition, sleep, protocol change log |
 | DOCTOR_QS.md | Queued questions for providers, visit summaries |
@@ -63,6 +64,9 @@ Data from connected services, with README import guides in each directory.
 | integrations/imaging/ | MRI, DEXA, CT, CAC, ultrasound reports | Summary |
 | integrations/assessments/ | Standardized health assessment scores (PHQ-9, GAD-7, PSQI, SF-36, etc.) | Summary |
 | integrations/cycle/ | Menstrual and fertility tracking data | Summary |
+| integrations/vitals/ | Home measurements: blood pressure, weight, ECG events, spot checks | Summary |
+| integrations/cgm/ | Continuous glucose monitoring daily summaries with meal context | Summary |
+| integrations/nutrition/ | Macro tracking exports and dietary phase records | Summary |
 | integrations/raw/ | Full-resolution raw exports (JSON/CSV/PDF) | Archive |
 
 ### Inbox

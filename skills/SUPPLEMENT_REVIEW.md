@@ -5,6 +5,7 @@ name: Supplement Review
 description: Evaluate current supplement stack efficacy against lab results, symptom trends, and protocol goals.
 reads:
   - SUPPLEMENTS.md
+  - MEDICATIONS.md
   - GENETICS.md
   - integrations/labs/*.md
   - integrations/genetics/*.md
@@ -86,7 +87,7 @@ Assign each supplement a level and cite the basis. Example: "Vitamin D for 25-OH
 
 **Interaction check:**
 - Supplement-supplement interactions (e.g., calcium impairs iron and zinc absorption; vitamin C enhances iron absorption)
-- Supplement-medication interactions (check PROFILE.md for active medications)
+- Supplement-medication interactions (check MEDICATIONS.md for active and PRN medications)
 - Supplement-gene interactions from GENETICS.md (e.g., COMT slow metabolizer + methylfolate = potential overmethylation symptoms)
 - Are any supplements redundant (targeting the same pathway at similar doses)?
 

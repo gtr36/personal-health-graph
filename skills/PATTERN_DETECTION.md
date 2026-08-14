@@ -11,7 +11,11 @@ reads:
   - integrations/labs/*.md
   - integrations/assessments/*.md
   - integrations/cycle/*.md
+  - integrations/vitals/*.md
+  - integrations/cgm/*.md
+  - integrations/nutrition/*.md
   - SUPPLEMENTS.md
+  - MEDICATIONS.md
   - PROTOCOLS.md
   # Voice-captured entries are in journal/*.md with source: voice
 external_context:

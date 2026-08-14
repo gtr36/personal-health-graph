@@ -8,7 +8,10 @@ reads:
   - integrations/wearable_daily/*.md
   - integrations/assessments/*.md
   - integrations/cycle/*.md
+  - integrations/cgm/*.md
+  - integrations/nutrition/*.md
   - SUPPLEMENTS.md
+  - MEDICATIONS.md
   - PROTOCOLS.md
   - journal/*.md
   # Voice-captured entries are in journal/*.md with source: voice
@@ -50,6 +53,7 @@ For each symptom cluster, check:
 - **Sleep on the prior night:** Duration, HRV, recovery score. Flag if consistently below personal baseline.
 - **Sleep on the night of the symptom:** Was it disrupted?
 - **Supplement adherence:** Were any supplements skipped in the 24-48hr window before the symptom?
+- **Medication changes:** Did any medication start, stop, or dose change (per MEDICATIONS.md) within 30 days before the symptom pattern began?
 - **Calendar density:** How many meetings/events on the symptom day and the day prior?
 - **Exercise:** Was there a workout the day before? Was strain unusually high or low?
 - **Weather:** Was barometric pressure dropping? Was it unusually hot/cold/humid?

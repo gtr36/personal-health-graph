@@ -41,6 +41,7 @@ Read every file's frontmatter (specifically `updated` timestamps and entry dates
 | File / Directory | Fresh | Aging | Stale | Critical |
 |-----------------|-------|-------|-------|----------|
 | PROFILE.md | < 90 days | 90-180 days | 180-365 days | > 365 days |
+| MEDICATIONS.md | < 90 days | 90-180 days | 180-365 days | > 365 days |
 | SUPPLEMENTS.md | < 30 days | 30-90 days | 90-180 days | > 180 days |
 | PROTOCOLS.md | < 60 days | 60-180 days | 180-365 days | > 365 days |
 | LABS_HISTORY.md | < 90 days | 90-180 days | 180-365 days | > 365 days |
@@ -52,6 +53,9 @@ Read every file's frontmatter (specifically `updated` timestamps and entry dates
 | integrations/labs/ | < 90 days | 90-180 days | 180-365 days | > 365 days |
 | integrations/assessments/ | < 45 days | 45-90 days | 90-180 days | > 180 days |
 | integrations/cycle/ | < 45 days | 45-90 days | 90-180 days | > 180 days |
+| integrations/vitals/ | < 30 days | 30-90 days | 90-180 days | > 180 days |
+| integrations/cgm/ | (wear-period based — flag only if a wear period ended > 6 months ago with no note) | | | |
+| integrations/nutrition/ | < 30 days | 30-90 days | 90-180 days | > 180 days |
 | integrations/microbiome/ | < 1 year | 1-2 years | 2-3 years | > 3 years |
 | integrations/imaging/ | < 1 year | 1-2 years | 2-3 years | > 3 years |
 | DOCTOR_QS.md | < 30 days | 30-90 days | 90-180 days | > 180 days |
@@ -74,8 +78,9 @@ Check that cross-references between files are consistent:
 - Flag: supplements that have been active > 90 days with no linked lab marker being tracked
 
 **2B: Medication ↔ Pharmacogenomics**
-- Every medication in PROFILE.md → check against pharmacogenomic data in GENETICS.md
+- Every medication in MEDICATIONS.md (Active and PRN) → check against pharmacogenomic data in GENETICS.md
 - Flag: medications without PGx review, especially CYP2D6/CYP2C19/CYP2C9 substrates
+- Flag: medications with a "Linked labs" safety marker (e.g., ALT for hepatically cleared drugs) that has no recent value in LABS_HISTORY.md
 
 **2C: Protocol Changes Log ↔ Lab Timeline**
 - Protocol changes in PROTOCOLS.md → check whether relevant labs were drawn before and after the change

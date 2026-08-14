@@ -40,6 +40,9 @@ integrations/microbiome/*.md
 integrations/imaging/*.md
 integrations/assessments/*.md
 integrations/cycle/*.md
+integrations/vitals/*.md
+integrations/cgm/*.md
+integrations/nutrition/*.md
 !integrations/*/README.md
 !integrations/*/_TEMPLATE.md
 

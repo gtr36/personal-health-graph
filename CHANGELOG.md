@@ -2,6 +2,24 @@
 
 All notable changes to the Personal Health Graph template. The `schema_version` in file frontmatter tracks the data schema; releases here track the template as a whole.
 
+## [0.2.0] — 2026-08-14
+
+Schema release: one new state file, three new integration types. Fully additive — files created under schema 0.1.0 remain valid.
+
+### Migration (one step)
+Move your Active Medications list from PROFILE.md into the new MEDICATIONS.md (PROFILE.md keeps a one-line pointer). INTAKE and QUICKSTART now write medications there automatically. That is the entire migration.
+
+### Added
+- **MEDICATIONS.md** — dedicated state file for active, PRN, and discontinued medications with doses, prescribers, indications, start/stop dates, pharmacogenomic notes, and an interactions section. Mirrors the SUPPLEMENTS.md structure. Medication start/stop history is what lets pattern analysis correlate medication changes with symptom and biomarker changes — previously impossible with the flat list in PROFILE.
+- **integrations/vitals/** — home measurements: blood pressure (the input every cardiovascular risk calculator needs and almost nobody has as a trend), weight and body composition, ECG events, spot checks. RISK_ASSESSMENT now prefers the BP trend over a single reading.
+- **integrations/cgm/** — continuous glucose summaries: daily mean, time-in-range, variability, and annotated excursions with meal context. Covers Dexcom, Libre/Lingo, and Levels.
+- **integrations/nutrition/** — macro tracking exports and dietary phase records, deliberately lightweight. Enables food-symptom correlation in SYMPTOM_ANALYSIS and meal-glucose pairing with CGM.
+- **PROFILE.md Hearing Health section** — audiologist, testing, devices, noise exposure; completes the dental/vision/hearing trio.
+
+### Changed
+- Ten skills updated to read the new files where relevant; MEETING_TO_PROTOCOL now writes medication changes to MEDICATIONS.md; MAINTENANCE cross-references medications from the new file and adds staleness thresholds for the new integrations; BASELINE_REPORT census covers all sources with a dynamic denominator that excludes non-applicable ones.
+- INTAKE gains three categories (vitals_export, cgm_export, nutrition_log) with archive routing; .gitignore covers the three new directories.
+
 ## [0.1.1] — 2026-08-14
 
 Template release. Schema version remains 0.1.0 — no breaking changes to data files.

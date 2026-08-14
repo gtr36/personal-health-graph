@@ -5,7 +5,8 @@ name: Intake
 description: Scan the inbox/ folder, identify and classify every file, extract health data into the appropriate PHG locations, archive originals to integrations/raw/, and produce a processing report.
 reads:
   - inbox/* (all files in the inbox)
-  - PROFILE.md (for context on existing conditions, providers, medications)
+  - PROFILE.md (for context on existing conditions and providers)
+  - MEDICATIONS.md (to avoid duplicating medication entries)
   - LABS_HISTORY.md (to avoid duplicating existing biomarker entries)
   - GENETICS.md (to avoid duplicating existing variant entries)
   - SUPPLEMENTS.md (to cross-reference supplement mentions in records)
@@ -14,7 +15,8 @@ writes:
   - LABS_HISTORY.md (append new biomarker rows)
   - GENETICS.md (append new variants)
   - SUPPLEMENTS.md (flag supplements mentioned in records but not in current stack)
-  - PROFILE.md (update medications, conditions, allergies, vaccinations, dental, vision, environmental, reproductive health if new info found)
+  - MEDICATIONS.md (active and discontinued medications from records and pharmacy lists)
+  - PROFILE.md (update conditions, allergies, vaccinations, dental, vision, hearing, environmental, reproductive health if new info found)
   - integrations/labs/*.md (new lab panel summaries)
   - integrations/genetics/*.md (new genetic summaries)
   - integrations/wearable_daily/*.md (new wearable summaries)
@@ -23,6 +25,9 @@ writes:
   - integrations/imaging/*.md (new imaging summaries)
   - integrations/assessments/*.md (new assessment score entries)
   - integrations/cycle/*.md (new cycle tracking summaries)
+  - integrations/vitals/*.md (new home vitals summaries)
+  - integrations/cgm/*.md (new CGM summaries)
+  - integrations/nutrition/*.md (new nutrition summaries)
   - integrations/raw/*/* (archived original files)
 saves_to: reports/intake_YYYY-MM-DD.md
 trigger: on-demand, whenever new files are added to inbox/
@@ -59,6 +64,9 @@ Scan every file in `inbox/`. For each file, determine:
    - `dental_record` — dental x-rays, periodontal charts, treatment plans, cleaning records
    - `vision_record` — eye exam reports, prescriptions, OCT scans, visual field tests
    - `cycle_data` — menstrual/fertility tracking exports, hormone cycle reports
+   - `vitals_export` — home blood pressure, smart scale, ECG (Omron, Withings, Kardia) exports
+   - `cgm_export` — continuous glucose data (Dexcom Clarity, LibreView, Levels)
+   - `nutrition_log` — food/macro tracking exports (Cronometer, MyFitnessPal), structured diet records
    - `insurance_billing` — EOBs, itemized bills, HSA/FSA records
    - `environmental_report` — water quality reports, air quality data, mold/toxin testing, heavy metal testing
    - `other` — anything that doesn't fit the above categories
@@ -78,7 +86,7 @@ Ask the user to confirm the inventory is correct, or flag any misclassifications
 Process files in this order (dependencies flow downstream):
 
 **Round 1 — Identity and context:**
-1. Medical records and medication lists → update PROFILE.md (conditions, medications, allergies, providers)
+1. Medical records and medication lists → update PROFILE.md (conditions, allergies, providers) and MEDICATIONS.md (active and discontinued medications with doses, prescribers, indications, and dates)
 2. Vaccination records → update PROFILE.md Vaccination Record table (vaccine, date, booster schedule)
 3. Dental records → update PROFILE.md Dental Health section and file imaging in `integrations/imaging/` if applicable
 4. Vision records → update PROFILE.md Vision Health section and file imaging in `integrations/imaging/` if applicable
@@ -118,8 +126,13 @@ Process files in this order (dependencies flow downstream):
 13. Cycle/fertility data → create monthly summaries in `integrations/cycle/` using the template. Cross-reference any hormonal labs with cycle day if both are available.
 14. Environmental reports (water quality, mold testing, heavy metal testing) → update PROFILE.md Environmental History section. Archive originals to `integrations/raw/environmental/`.
 
-**Round 7 — Financial (if present):**
-15. Insurance/billing documents → extract relevant costs, update EXPENSES.md if the user tracks expenses
+**Round 7 — Vitals, CGM, and nutrition:**
+15. Vitals exports (BP, weight, ECG) → create monthly summaries in `integrations/vitals/` using the template. Note the measurement protocol if the source documents it.
+16. CGM exports → create monthly summaries in `integrations/cgm/` using the template: daily mean, time-in-range, CV, min/max. Note the wear period explicitly.
+17. Nutrition logs → create monthly summaries in `integrations/nutrition/` using the template: weekly averages for tracked data, dietary phase context otherwise.
+
+**Round 8 — Financial (if present):**
+18. Insurance/billing documents → extract relevant costs, update EXPENSES.md if the user tracks expenses
 
 ### Phase 3: Archive originals
 
@@ -141,6 +154,9 @@ Move every processed file from `inbox/` to the appropriate subdirectory in `inte
 | dental_record | integrations/raw/dental/ |
 | vision_record | integrations/raw/vision/ |
 | cycle_data | integrations/raw/cycle/ |
+| vitals_export | integrations/raw/vitals/ |
+| cgm_export | integrations/raw/cgm/ |
+| nutrition_log | integrations/raw/nutrition/ |
 | insurance_billing | integrations/raw/billing/ |
 | environmental_report | integrations/raw/environmental/ |
 | other | integrations/raw/other/ |

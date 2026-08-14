@@ -6,12 +6,14 @@ name: Meeting to Protocol
 description: Extract health-relevant information from meeting transcripts, update PHG files, schedule protocols in calendar, and create trackable follow-up items.
 reads:
   - PROFILE.md
+  - MEDICATIONS.md
   - SUPPLEMENTS.md
   - PROTOCOLS.md
   - DOCTOR_QS.md
   - LABS_HISTORY.md
 writes:
-  - PROFILE.md (medication changes, new diagnoses)
+  - MEDICATIONS.md (medication starts, stops, dose changes from the visit)
+  - PROFILE.md (new diagnoses)
   - SUPPLEMENTS.md (additions, dose adjustments, discontinuations)
   - PROTOCOLS.md (protocol changes log)
   - DOCTOR_QS.md (visit log, lab orders, carried-forward questions)
@@ -108,7 +110,7 @@ For each category extracted, update the appropriate file:
 
 | Extracted Data | PHG File | Action |
 |---------------|----------|--------|
-| Medication changes | PROFILE.md → Medications section | Add/remove/modify medication entries |
+| Medication changes | MEDICATIONS.md → Active / Discontinued | Add new entries with prescriber and indication; move stopped medications to Discontinued with date and reason |
 | Lab orders | DOCTOR_QS.md → add to queued items | Document what was ordered and when |
 | Supplement changes | SUPPLEMENTS.md | Add new, adjust doses, move to Discontinued |
 | Protocol changes | PROTOCOLS.md → Protocol Changes Log | Add dated entry with what changed and why |

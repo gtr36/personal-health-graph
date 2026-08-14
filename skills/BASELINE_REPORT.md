@@ -6,6 +6,7 @@ description: First-run comprehensive assessment. Establishes personal baselines,
 reads:
   - reports/baseline_report_*.md (prior baselines, for tracking trajectory)
   - PROFILE.md
+  - MEDICATIONS.md
   - LABS_HISTORY.md
   - GENETICS.md
   - SUPPLEMENTS.md
@@ -18,6 +19,9 @@ reads:
   - integrations/imaging/*.md
   - integrations/assessments/*.md
   - integrations/cycle/*.md
+  - integrations/vitals/*.md
+  - integrations/cgm/*.md
+  - integrations/nutrition/*.md
   - symptoms/*.md
   - journal/*.md
   - EXPENSES.md
@@ -59,6 +63,10 @@ Before any analysis, inventory everything that exists and everything that's miss
 | Protocols | None / Partial / Detailed | — | Exercise, nutrition, sleep documented? |
 | Assessments | None / 1 instrument / Tracked over time | Date range | Which instruments (PHQ-9, GAD-7, PSQI, etc.)? |
 | Cycle tracking | None / Partial / Monthly | Date range | Ovulation markers tracked? (if applicable) |
+| Medications | None / Listed / Detailed | — | Doses, prescribers, indications, start/stop history? |
+| Home vitals | None / Sparse / Regular | Date range | BP protocol consistent? Weight trend? |
+| CGM | None / 1 wear period / Recurring | Date range | Wear periods noted? Target range stated? |
+| Nutrition | None / Phases only / Tracked | Date range | Macro exports or dietary phase context? |
 
 ### Step 2: Establish baselines
 For every metric with sufficient data (minimum 14 days for wearable data, 1 panel for labs), establish a personal baseline:
@@ -123,7 +131,7 @@ Prioritize gaps by impact:
 ---
 
 ## Data Completeness Score
-[X / 13] — based on how many of the 13 data sources in the Step 1 census are populated with usable data. (Mark cycle tracking N/A rather than missing when it does not apply, and score out of 12.)
+[X / N] — where N is the number of rows in the Step 1 census table that apply to this user. Mark non-applicable sources (e.g., cycle tracking, CGM never worn) as N/A and exclude them from the denominator, so the score reflects coverage of what is actually collectible.
 
 [1-2 sentences explaining the score and its implications for analysis quality.]
 

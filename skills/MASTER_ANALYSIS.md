@@ -5,6 +5,7 @@ name: Master Analysis
 description: Full-depth health optimization analysis. Consolidates labs, analyzes genetics, cross-references both, and develops a personalized supplement protocol with evidence-based justifications.
 reads:
   - PROFILE.md
+  - MEDICATIONS.md
   - LABS_HISTORY.md
   - GENETICS.md
   - SUPPLEMENTS.md

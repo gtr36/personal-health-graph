@@ -27,7 +27,8 @@ personal_health_graph/
 ├── .claude/skills/         ← Native Claude Code slash commands (thin wrappers)
 ├── .gitignore              ← Protects personal data from accidental commits
 │
-├── PROFILE.md              ← Demographics, conditions, meds, providers
+├── PROFILE.md              ← Demographics, conditions, providers
+├── MEDICATIONS.md          ← Prescriptions: active, discontinued, interactions
 ├── SUPPLEMENTS.md          ← Active stack: doses, timing, brands, rationale
 ├── PROTOCOLS.md            ← Routines, exercise, nutrition, sleep
 ├── DOCTOR_QS.md            ← Queued questions for providers, visit log
@@ -47,6 +48,9 @@ personal_health_graph/
 │   ├── imaging/            ← MRI, DEXA, CT, ultrasound reports
 │   ├── assessments/        ← Standardized health assessments (PHQ-9, GAD-7, PSQI, etc.)
 │   ├── cycle/              ← Menstrual and fertility tracking
+│   ├── vitals/             ← Home BP, weight, ECG events, spot checks
+│   ├── cgm/                ← Continuous glucose monitoring summaries
+│   ├── nutrition/          ← Macro tracking and dietary phases
 │   └── raw/                ← Full-resolution raw exports (JSON/CSV/PDF)
 │
 ├── CONNECTORS.md           ← External tool integrations (MCPs, APIs)
@@ -166,7 +170,7 @@ The files are plain markdown. Any LLM that accepts text input can read them. The
 ## File types explained
 
 ### State files (modified in place)
-`PROFILE.md`, `SUPPLEMENTS.md`, `PROTOCOLS.md`, `DOCTOR_QS.md`, `EXPENSES.md`, `LABS_HISTORY.md`, `GENETICS.md`
+`PROFILE.md`, `MEDICATIONS.md`, `SUPPLEMENTS.md`, `PROTOCOLS.md`, `DOCTOR_QS.md`, `EXPENSES.md`, `LABS_HISTORY.md`, `GENETICS.md`
 
 These represent current truth. When your supplement stack changes, you update `SUPPLEMENTS.md`. When you get new lab results, you add rows to `LABS_HISTORY.md`. The file always reflects the latest state.
 

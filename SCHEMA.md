@@ -1,6 +1,7 @@
 ---
-schema_version: "0.1.0"
+schema_version: "0.2.0"
 created: 2026-04-08
+updated: 2026-08-14
 author: Garrett Ruhland
 ---
 
@@ -24,7 +25,8 @@ author: Garrett Ruhland
 
 ### State Files
 Represent current truth. Modified in place when state changes.
-- `PROFILE.md` — demographics, conditions, allergies, medications, providers, insurance, goals
+- `PROFILE.md` — demographics, conditions, allergies, providers, insurance, goals (medications live in MEDICATIONS.md; PROFILE keeps a pointer)
+- `MEDICATIONS.md` — active, PRN, and discontinued medications with doses, prescribers, indications, start/stop dates, pharmacogenomic notes, and interactions
 - `SUPPLEMENTS.md` — active stack with doses, timing, brands, purchase links, costs, start dates, reasons, genetic/lab citations; discontinued supplements with stop dates and reasons
 - `PROTOCOLS.md` — routines, exercise schedules, nutrition framework, supplement cycling, protocol change log
 - `DOCTOR_QS.md` — queued questions for providers, visit summaries with dates and action items
@@ -48,6 +50,9 @@ Data from connected services. Two tiers:
   - `integrations/imaging/` — MRI, DEXA, CT, ultrasound, CAC reports
   - `integrations/assessments/` — standardized health assessment scores (PHQ-9, GAD-7, PSQI, SF-36, etc.)
   - `integrations/cycle/` — menstrual and fertility tracking data
+  - `integrations/vitals/` — home measurements: blood pressure, weight, ECG events, spot checks
+  - `integrations/cgm/` — continuous glucose monitoring summaries with meal context
+  - `integrations/nutrition/` — macro tracking exports and dietary phase records
 - **Archive tier** (`integrations/raw/`) — full-resolution exports (JSON, CSV, PDF). Exists for portability and deep-dive analysis. Not read by standard skills.
 
 Each integration subdirectory contains a README with import instructions for common platforms.
@@ -77,7 +82,7 @@ Data files (state, log, and integration files) include YAML frontmatter with con
 
 ### Required fields (data files)
 ```yaml
-schema_version: "0.1.0"    # Schema version for forward compatibility
+schema_version: "0.2.0"    # Schema version for forward compatibility
 type: state | log | integration | skill | meta
 created: ISO 8601 datetime  # When the file was created
 updated: ISO 8601 datetime  # When the file was last modified
@@ -197,6 +202,10 @@ The `schema_version` field enables forward compatibility:
 - Minor (0.1.0 → 0.2.0): new file types or directory restructuring. Migration guide provided.
 - Major (0.x → 1.0): stable, production-ready schema.
 
+**Version history:**
+- **0.1.0 (April 2026):** initial schema.
+- **0.2.0 (August 2026):** added the MEDICATIONS.md state file and three integration types (vitals, cgm, nutrition); added Hearing Health to PROFILE.md. Fully additive — files created under 0.1.0 remain valid. Migration: move the Active Medications list from PROFILE.md into MEDICATIONS.md; PROFILE.md keeps a one-line pointer. INTAKE and QUICKSTART handle this automatically for new imports.
+
 ## Directory Structure
 
 ```
@@ -209,6 +218,7 @@ personal_health_graph/
 ├── .claude/skills/       (thin wrappers: native Claude Code slash commands)
 │
 ├── PROFILE.md
+├── MEDICATIONS.md
 ├── SUPPLEMENTS.md
 ├── PROTOCOLS.md
 ├── DOCTOR_QS.md
@@ -240,6 +250,15 @@ personal_health_graph/
 │   │   ├── README.md
 │   │   └── _TEMPLATE.md
 │   ├── cycle/
+│   │   ├── README.md
+│   │   └── _TEMPLATE.md
+│   ├── vitals/
+│   │   ├── README.md
+│   │   └── _TEMPLATE.md
+│   ├── cgm/
+│   │   ├── README.md
+│   │   └── _TEMPLATE.md
+│   ├── nutrition/
 │   │   ├── README.md
 │   │   └── _TEMPLATE.md
 │   └── raw/

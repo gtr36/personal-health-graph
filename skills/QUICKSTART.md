@@ -13,6 +13,7 @@ reads:
   - EXPENSES.md
 writes:
   - PROFILE.md
+  - MEDICATIONS.md
   - SUPPLEMENTS.md
   - PROTOCOLS.md
   - DOCTOR_QS.md
@@ -26,6 +27,9 @@ writes:
   - integrations/microbiome/*.md
   - integrations/assessments/*.md
   - integrations/cycle/*.md
+  - integrations/vitals/*.md
+  - integrations/cgm/*.md
+  - integrations/nutrition/*.md
   - symptoms/*.md
   - journal/*.md
 trigger: first time using Personal Health Graph, or when PROFILE.md is empty
@@ -91,7 +95,7 @@ Ask in natural language, then structure the answers:
 - "What medications are you currently taking? Include dose and frequency if you know them."
 - "Any significant family medical history? Parents, siblings, grandparents — particularly heart disease, cancer, diabetes, autoimmune conditions, neurological conditions."
 
-**Write to:** PROFILE.md → Conditions, Allergies, Medications, Family History sections
+**Write to:** PROFILE.md → Conditions, Allergies, Family History sections; medications go to MEDICATIONS.md → Active (with dose, frequency, prescriber, and indication; PROFILE.md keeps the pointer)
 
 #### 1C: Providers
 - "Who are your current healthcare providers? Primary care doctor, specialists, therapists, dentist — anyone you see regularly."
@@ -283,6 +287,18 @@ Now that we have health data flowing, capture routines:
 - "Is there anything you've been meaning to ask a doctor but haven't? Questions about your labs, symptoms, medications, family history, anything."
 
 **Write to:** DOCTOR_QS.md
+
+#### 3L: Home vitals, CGM, and nutrition
+- "Do you measure anything at home? Blood pressure cuff, smart scale, ECG device like Apple Watch or Kardia? Have you ever worn a continuous glucose monitor? Do you track your food with an app like Cronometer or MyFitnessPal?"
+
+**If yes to any:**
+- Guide export (platform-specific instructions in the `integrations/vitals/`, `integrations/cgm/`, and `integrations/nutrition/` READMEs)
+- Create monthly summaries in the matching directory
+- For BP: note the measurement protocol (time of day, seated, pre-caffeine) so trend data is comparable
+- For CGM: note wear periods explicitly
+
+**If no:**
+- If the user has cardiovascular risk factors or family history, note that a home BP cuff is the single highest-value measurement device they can add, and RISK_ASSESSMENT will use the trend
 
 #### Tier 3 checkpoint
 

@@ -1,5 +1,5 @@
 ---
-schema_version: "0.2.0"
+schema_version: "0.3.0"
 created: 2026-04-08
 updated: 2026-08-14
 author: Garrett Ruhland
@@ -33,6 +33,8 @@ Represent current truth. Modified in place when state changes.
 - `EXPENSES.md` — consolidated cost tracking: supplements, wearable subscriptions, lab memberships, services
 - `LABS_HISTORY.md` — longitudinal biomarker table across all providers and draw dates, with annotations
 - `GENETICS.md` — clinically significant genetic variants organized by category, with cross-references to labs and supplements
+- `EXPERIMENTS.md` — pre-registered N-of-1 self-experiments: designs are written before interventions start and never edited afterward; only status and result fields update
+- `TIMELINE.md` — derived chronological spine of all dated events; rebuilt from source files by the TIMELINE skill, never hand-edited
 
 ### Log Files
 Append-only. One file per month. New entries added chronologically. Existing entries are never modified except to append resolution notes.
@@ -82,7 +84,7 @@ Data files (state, log, and integration files) include YAML frontmatter with con
 
 ### Required fields (data files)
 ```yaml
-schema_version: "0.2.0"    # Schema version for forward compatibility
+schema_version: "0.3.0"    # Schema version for forward compatibility
 type: state | log | integration | skill | meta
 created: ISO 8601 datetime  # When the file was created
 updated: ISO 8601 datetime  # When the file was last modified
@@ -205,6 +207,7 @@ The `schema_version` field enables forward compatibility:
 **Version history:**
 - **0.1.0 (April 2026):** initial schema.
 - **0.2.0 (August 2026):** added the MEDICATIONS.md state file and three integration types (vitals, cgm, nutrition); added Hearing Health to PROFILE.md. Fully additive — files created under 0.1.0 remain valid. Migration: move the Active Medications list from PROFILE.md into MEDICATIONS.md; PROFILE.md keeps a one-line pointer. INTAKE and QUICKSTART handle this automatically for new imports.
+- **0.3.0 (August 2026):** added EXPERIMENTS.md (pre-registered N-of-1 experiments) and TIMELINE.md (derived chronological spine), four skills (EXPERIMENT, FACT_AUDIT, SPECIALIST_TRANSLATOR, TIMELINE), and the sample/ demo patient. Fully additive — no migration required.
 
 ## Directory Structure
 
@@ -225,6 +228,10 @@ personal_health_graph/
 ├── EXPENSES.md
 ├── LABS_HISTORY.md
 ├── GENETICS.md
+├── EXPERIMENTS.md
+├── TIMELINE.md
+│
+├── sample/               (fictional demo patient with answer key — try before importing)
 │
 ├── symptoms/
 │   └── _TEMPLATE.md      (copy and rename to YYYY-MM.md)
@@ -284,6 +291,10 @@ personal_health_graph/
     ├── INTAKE.md
     ├── QUICKSTART.md
     ├── MAINTENANCE.md
+    ├── EXPERIMENT.md
+    ├── FACT_AUDIT.md
+    ├── SPECIALIST_TRANSLATOR.md
+    ├── TIMELINE.md
     └── workflows/
         ├── MEETING_TO_PROTOCOL.md
         ├── PHYSICIAN_REPORT.md

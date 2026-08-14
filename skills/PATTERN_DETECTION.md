@@ -5,6 +5,8 @@ name: Pattern Detection
 description: Full-history scan for recurring correlations, emerging trends, and anomalies across all data sources.
 reads:
   - reports/pattern_detection_*.md (prior scans, to avoid redundant findings)
+  - TIMELINE.md (the chronological index — read first to scope the scan)
+  - EXPERIMENTS.md (completed experiments settle hypotheses; do not re-report them)
   - symptoms/*.md
   - journal/*.md
   - integrations/wearable_daily/*.md

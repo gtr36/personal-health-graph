@@ -5,6 +5,7 @@ name: Symptom Analysis
 description: Cross-reference symptoms with sleep, supplements, calendar, and wearable data to identify correlations and recurring patterns.
 reads:
   - symptoms/*.md
+  - TIMELINE.md (chronological index of interventions and events)
   - integrations/wearable_daily/*.md
   - integrations/assessments/*.md
   - integrations/cycle/*.md

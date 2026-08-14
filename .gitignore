@@ -15,6 +15,9 @@
 # If you're using this repo as your working copy (not recommended),
 # untrack each state file first, then uncomment its line:
 # PROFILE.md
+# MEDICATIONS.md
+# EXPERIMENTS.md
+# TIMELINE.md
 # SUPPLEMENTS.md
 # PROTOCOLS.md
 # DOCTOR_QS.md
@@ -57,6 +60,9 @@ integrations/raw/**
 # All report files are ignored except the README
 reports/*
 !reports/README.md
+
+# NOTE: sample/ is fictional demo data and is intentionally tracked.
+# The ignore patterns above are rooted paths and do not apply inside sample/.
 
 # ----- OS and editor files -----
 .DS_Store

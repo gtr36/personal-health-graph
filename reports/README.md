@@ -24,6 +24,9 @@ Every time you run a skill (SUPPLEMENT_REVIEW, RISK_ASSESSMENT, HEALTH_MEMO, etc
 | MASTER_ANALYSIS | `master_analysis_YYYY-MM-DD` | .md, .docx | Comprehensive 5-phase analysis across all data |
 | MAINTENANCE | `maintenance_YYYY-MM-DD` | .md | Staleness audit, cross-reference validation, action items |
 | INTAKE | `intake_YYYY-MM-DD` | .md | Processing log of inbox files: what was extracted, where it went, items needing verification |
+| EXPERIMENT | `experiment_[name]_YYYY-MM-DD` | .md | N-of-1 evaluation: result vs pre-committed criterion, verdict, decision |
+| FACT_AUDIT | `fact_audit_YYYY-MM-DD` | .md | Claim-by-claim re-verification of a prior report against primary sources |
+| SPECIALIST_TRANSLATOR | `specialist_brief_[specialty]_YYYY-MM-DD` | .md, .docx | Specialty-native handoff brief with pertinent negatives and draft codes |
 
 **Workflow skill outputs:**
 

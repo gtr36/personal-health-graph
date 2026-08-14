@@ -26,6 +26,12 @@ Skills are in `skills/*.md` and `skills/workflows/*.md`. To run a skill, read th
 - `skills/HEALTH_MEMO.md` — Amazon-style narrative health briefing
 - `skills/BASELINE_REPORT.md` — first-run assessment with gap analysis
 - `skills/RISK_ASSESSMENT.md` — cardiovascular and genetic risk review
+- `skills/EXPERIMENT.md` — design and evaluate N-of-1 self-experiments (writes EXPERIMENTS.md)
+- `skills/FACT_AUDIT.md` — re-verify a prior report's claims against primary sources
+- `skills/SPECIALIST_TRANSLATOR.md` — specialty-native handoff briefs
+- `skills/TIMELINE.md` — rebuild TIMELINE.md, the derived chronological event spine
+
+**Demo data:** `sample/` contains a fully populated fictional patient (Sam Rivera) with planted findings documented in `sample/ANSWER_KEY.md`. Use it to demo skills or benchmark analysis quality. Never mix sample data into a real user's graph.
 
 **Workflow skills (chain external connectors):**
 - `skills/workflows/MEETING_TO_PROTOCOL.md` — doctor visit transcript → PHG updates
@@ -49,7 +55,7 @@ Because the wrappers are committed to the repo, they also load in Claude cloud s
 
 ### File modification rules
 
-**State files** (`PROFILE.md`, `SUPPLEMENTS.md`, `PROTOCOLS.md`, `DOCTOR_QS.md`, `EXPENSES.md`, `LABS_HISTORY.md`, `GENETICS.md`) — modify in place. They represent current truth.
+**State files** (`PROFILE.md`, `MEDICATIONS.md`, `SUPPLEMENTS.md`, `PROTOCOLS.md`, `DOCTOR_QS.md`, `EXPENSES.md`, `LABS_HISTORY.md`, `GENETICS.md`, `EXPERIMENTS.md`, `TIMELINE.md`) — modify in place. They represent current truth. Two exceptions to normal editing: experiment designs in `EXPERIMENTS.md` are never edited after an experiment starts (only status and result fields), and `TIMELINE.md` is derived — fix source files and rebuild via `skills/TIMELINE.md`, never hand-edit events.
 
 **Log files** (`symptoms/YYYY-MM.md`, `journal/YYYY-MM.md`) — append only. Never modify existing entries. One file per month named `YYYY-MM.md`. Copy from the `_TEMPLATE.md` in each directory.
 

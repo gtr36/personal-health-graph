@@ -2,6 +2,23 @@
 
 All notable changes to the Personal Health Graph template. The `schema_version` in file frontmatter tracks the data schema; releases here track the template as a whole.
 
+## [0.3.0] — 2026-08-14
+
+The epistemics release: try before you commit, test what you find, audit what you conclude. Fully additive — no migration required.
+
+### Added
+- **sample/** — a fully populated fictional patient (Sam Rivera: 14 months of labs, wearables, genetics, symptoms, and journal entries) with seven findings deliberately planted in the data and an ANSWER_KEY.md eval rubric. Point any AI at `sample/` and run BASELINE_REPORT to see the system work in five minutes, with zero personal data committed. The answer key doubles as a quality benchmark for whichever model you use.
+- **EXPERIMENTS.md + skills/EXPERIMENT.md** — pre-registered N-of-1 self-experiments: baseline and intervention windows, one variable, a pre-committed success criterion, and an evaluation that cannot move its own goalposts. The bridge from "suggested test" at the end of every analysis to an actual answer. Includes a hard safety boundary: no experiments on prescription medications.
+- **skills/FACT_AUDIT.md** — adversarial re-verification of a prior report's load-bearing claims against primary sources, using a checklist of the known error classes (strand orientation, units, date attribution, reference ranges), with propagation analysis for anything discrepant and an optional cross-model check.
+- **skills/SPECIALIST_TRANSLATOR.md** — specialty-native handoff briefs (immunology, cardiology, OB-GYN, psychiatry, endocrinology, GI, sleep, dermatology, new-PCP) with pertinent negatives, complete medication lists, timeline of the presenting problem, and draft ICD-10 codes via connector.
+- **TIMELINE.md + skills/TIMELINE.md** — the derived chronological spine: every dated event from every file on one timeline with lag annotations and conflict detection. Rebuilt by the skill, refreshed by MAINTENANCE, read as an index by the analysis skills.
+- **README sections** — running graphs for more than one person (a folder per person, caregiver guidance) and sharing parts of your graph (reports as the unit of sharing, redaction guidance).
+
+### Changed
+- PATTERN_DETECTION, SYMPTOM_ANALYSIS, and HEALTH_MEMO read TIMELINE.md as their chronological index and EXPERIMENTS.md so settled hypotheses are not re-reported.
+- MAINTENANCE flags overdue experiment evaluations, surfaces untested hypotheses from recent reports, and rebuilds a stale timeline as a safe auto-update.
+- Four new native Claude Code skill wrappers (`/experiment`, `/fact_audit`, `/specialist_translator`, `/timeline`).
+
 ## [0.2.0] — 2026-08-14
 
 Schema release: one new state file, three new integration types. Fully additive — files created under schema 0.1.0 remain valid.

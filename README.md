@@ -35,6 +35,10 @@ personal_health_graph/
 ├── EXPENSES.md             ← Cost tracking across all health interventions
 ├── LABS_HISTORY.md         ← Longitudinal lab results across all providers
 ├── GENETICS.md             ← Genetic variants, interpretations, linked actions
+├── EXPERIMENTS.md          ← Pre-registered N-of-1 self-experiments
+├── TIMELINE.md             ← Derived chronological spine of all dated events
+│
+├── sample/                 ← Fictional demo patient — try the system in 5 minutes
 │
 ├── symptoms/               ← Monthly symptom logs (append-only)
 ├── journal/                ← Notes, patterns, hypotheses, voice memos, mood
@@ -73,6 +77,10 @@ personal_health_graph/
     ├── INTAKE.md           ← Bulk file processor (inbox/ → structured data)
     ├── QUICKSTART.md       ← Guided onboarding wizard
     ├── MAINTENANCE.md      ← Scheduled review and auto-update
+    ├── EXPERIMENT.md       ← Design and evaluate N-of-1 self-experiments
+    ├── FACT_AUDIT.md       ← Re-verify a report's claims against source files
+    ├── SPECIALIST_TRANSLATOR.md ← Specialty-native handoff briefs (ICD-10 tagged)
+    ├── TIMELINE.md         ← Rebuild the chronological event spine
     └── workflows/          ← Multi-step automations with external tools
         ├── MEETING_TO_PROTOCOL.md
         ├── PHYSICIAN_REPORT.md
@@ -89,6 +97,8 @@ personal_health_graph/
 2. **Pick your AI.** Claude (claude.ai, the desktop app, or Claude Code in a terminal) or ChatGPT both work. If you're not sure, Claude's Cowork mode is the easiest: it can open the folder directly and read and write the files for you.
 3. **Let the AI drive.** Point your AI at the folder and say: *"Read skills/QUICKSTART.md and help me set up my Personal Health Graph."* It will walk you through everything from there, one question at a time.
 4. **See your first result.** Once some data is in, say: *"Run skills/BASELINE_REPORT.md."* That first report — where you stand, what's missing, what to do next — is the moment the system starts paying for itself.
+
+**Want to see it work before adding any of your own data?** Point your AI at the `sample/` folder — a fully populated fictional patient — and say: *"Run skills/BASELINE_REPORT.md against the sample/ directory."* Five minutes, zero commitment, and `sample/ANSWER_KEY.md` tells you afterward what a strong analysis should have found (it doubles as a quality benchmark for whichever AI you're using).
 
 The detailed version:
 
@@ -170,7 +180,9 @@ The files are plain markdown. Any LLM that accepts text input can read them. The
 ## File types explained
 
 ### State files (modified in place)
-`PROFILE.md`, `MEDICATIONS.md`, `SUPPLEMENTS.md`, `PROTOCOLS.md`, `DOCTOR_QS.md`, `EXPENSES.md`, `LABS_HISTORY.md`, `GENETICS.md`
+`PROFILE.md`, `MEDICATIONS.md`, `SUPPLEMENTS.md`, `PROTOCOLS.md`, `DOCTOR_QS.md`, `EXPENSES.md`, `LABS_HISTORY.md`, `GENETICS.md`, `EXPERIMENTS.md`, `TIMELINE.md`
+
+Two of these have special rules. `EXPERIMENTS.md` is append-only in spirit: experiment designs are never edited after the experiment starts, only their status and results fields. `TIMELINE.md` is derived: it is rebuilt from the other files by the TIMELINE skill, and corrections belong in the source files, never in the timeline itself.
 
 These represent current truth. When your supplement stack changes, you update `SUPPLEMENTS.md`. When you get new lab results, you add rows to `LABS_HISTORY.md`. The file always reflects the latest state.
 
@@ -274,6 +286,18 @@ If you fork this repo and use it as a working copy with git, the `.gitignore` pr
 Most users will simply download the ZIP, unzip it, and fill in their data locally — in that case, git is not involved and there's no risk of accidental exposure.
 
 The MIT license applies to the template schema and skill files. It does not grant anyone rights to your personal health data.
+
+### Sharing parts of your graph
+
+The unit of sharing is the report, never the raw graph. When a clinician, family member, or coach needs something, generate the scoped artifact (a SPECIALIST_TRANSLATOR brief, a DOCTOR_PREP summary, a HEALTH_MEMO) and share that. Before sharing anything, strip what the recipient does not need: insurance IDs, other providers' names if irrelevant, and anything about family members that is their story rather than yours. A quick pass with your AI ("review this brief for anything the recipient doesn't need") is cheap insurance. And remember that anything sent through a portal, email, or messaging app is governed by that channel's retention, not yours.
+
+---
+
+## Running graphs for more than one person
+
+A health graph per person, a folder per graph. That is the entire architecture: copy the template again for your partner, your child, or a parent you help care for, and keep each copy in its own folder. The skills work identically on every copy, and nothing cross-contaminates because nothing is shared except the methodology.
+
+Two practices matter for caregivers. First, keep each person's folder clearly named and point your AI at exactly one at a time; a model with two people's labs in context will eventually blend them. Second, respect that a graph you maintain for someone else is still their record: pregnancy monitoring, a child's growth data, or an aging parent's medication list deserve the same sharing discipline you apply to your own, and more consent, not less, as they become able to hold it themselves.
 
 ---
 

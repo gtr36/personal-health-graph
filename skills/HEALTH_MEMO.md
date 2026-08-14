@@ -5,6 +5,8 @@ name: Health Memo
 description: Amazon-style 6-pager health briefing. Narrative synthesis of all health data into a structured decision document with hypotheses, evidence, and action plan.
 reads:
   - reports/health_memo_*.md (prior memos, for tracking what changed)
+  - TIMELINE.md
+  - EXPERIMENTS.md (experiment verdicts are among the strongest evidence available)
   - PROFILE.md
   - MEDICATIONS.md
   - LABS_HISTORY.md

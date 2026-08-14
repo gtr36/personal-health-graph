@@ -42,6 +42,8 @@ Read every file's frontmatter (specifically `updated` timestamps and entry dates
 |-----------------|-------|-------|-------|----------|
 | PROFILE.md | < 90 days | 90-180 days | 180-365 days | > 365 days |
 | MEDICATIONS.md | < 90 days | 90-180 days | 180-365 days | > 365 days |
+| EXPERIMENTS.md | (deadline-based — flag any active experiment past its evaluation date) | | | |
+| TIMELINE.md | (derived — flag if any source file is newer than the last rebuild) | | | |
 | SUPPLEMENTS.md | < 30 days | 30-90 days | 90-180 days | > 180 days |
 | PROTOCOLS.md | < 60 days | 60-180 days | 180-365 days | > 365 days |
 | LABS_HISTORY.md | < 90 days | 90-180 days | 180-365 days | > 365 days |
@@ -96,6 +98,10 @@ Check that cross-references between files are consistent:
 - Cost per month in EXPENSES.md → does it match the individual costs in SUPPLEMENTS.md?
 - Flag: discrepancies, missing items
 
+**2F: EXPERIMENTS.md status**
+- Run the EXPERIMENT skill's status-check mode: any active experiment past its evaluation date is overdue — flag it for evaluation
+- Any hypothesis flagged as "suggested test" in a recent analysis report with no corresponding experiment → surface as a candidate for design
+
 ### Phase 3: Data Completeness Check
 
 Compare current state against the BASELINE_REPORT data completeness framework:
@@ -129,6 +135,7 @@ The following updates can be made automatically (without user confirmation):
 - **Entry counts:** Recalculate `entry_count` in log file frontmatter
 - **MANIFEST.md:** Update `file_count` if new files have been added
 - **EXPENSES.md:** Recalculate monthly totals from SUPPLEMENTS.md if individual supplement costs are documented
+- **TIMELINE.md:** Rebuild via `skills/TIMELINE.md` if any source file is newer than the timeline's last rebuild
 
 All other updates require user confirmation before execution.
 

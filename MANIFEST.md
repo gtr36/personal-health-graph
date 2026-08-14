@@ -1,14 +1,14 @@
 ---
-schema_version: "0.2.0"
+schema_version: "0.3.0"
 created: 2026-04-08
 updated: 2026-08-14
-file_count: 83
+file_count: 125
 ---
 
 # Personal Health Graph — Manifest
 
 ## Schema Version
-Schema 0.2.0 · Template release 0.2.0 (August 2026). See CHANGELOG.md for release history and SCHEMA.md for the migration note.
+Schema 0.3.0 · Template release 0.3.0 (August 2026). See CHANGELOG.md for release history and SCHEMA.md for version history and migration notes.
 
 ## File Index
 
@@ -42,6 +42,8 @@ Files representing current truth. Modified in place when state changes.
 | EXPENSES.md | Consolidated cost tracking for all health interventions |
 | LABS_HISTORY.md | Longitudinal biomarker table across all providers and draw dates |
 | GENETICS.md | Clinically significant genetic variants with cross-references |
+| EXPERIMENTS.md | Pre-registered N-of-1 self-experiments with pre-committed criteria |
+| TIMELINE.md | Derived chronological spine of all dated events (rebuilt by the TIMELINE skill) |
 
 ### Log Files
 Append-only files organized by month.
@@ -68,6 +70,13 @@ Data from connected services, with README import guides in each directory.
 | integrations/cgm/ | Continuous glucose monitoring daily summaries with meal context | Summary |
 | integrations/nutrition/ | Macro tracking exports and dietary phase records | Summary |
 | integrations/raw/ | Full-resolution raw exports (JSON/CSV/PDF) | Archive |
+
+### Sample
+Fictional demo patient for evaluation and onboarding.
+
+| Directory | Purpose |
+|-----------|---------|
+| sample/ | Fully populated fictional graph (Sam Rivera) with planted findings and an answer key — run any skill against it before importing real data |
 
 ### Inbox
 Drop zone for unprocessed health files.
@@ -99,6 +108,10 @@ Analysis methodology files that any LLM can execute against your data.
 | skills/INTAKE.md | Scan inbox/, classify files, extract data, populate PHG, archive originals |
 | skills/QUICKSTART.md | Guided onboarding wizard — 3-tier progressive setup from 15 min to full baseline |
 | skills/MAINTENANCE.md | Scheduled review — staleness audit, cross-reference validation, auto-updates |
+| skills/EXPERIMENT.md | Design, monitor, and evaluate N-of-1 self-experiments with pre-committed criteria |
+| skills/FACT_AUDIT.md | Re-verify a prior report's load-bearing claims against primary sources |
+| skills/SPECIALIST_TRANSLATOR.md | Specialty-native handoff briefs with pertinent negatives and draft ICD-10 codes |
+| skills/TIMELINE.md | Rebuild TIMELINE.md from all dated events with lag annotations |
 
 ### Workflow Skills
 Multi-step automations that chain PHG analysis with external connectors.

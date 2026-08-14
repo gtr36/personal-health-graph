@@ -2,7 +2,7 @@
 schema_version: "0.3.0"
 created: 2026-04-08
 updated: 2026-08-14
-file_count: 125
+file_count: 126
 ---
 
 # Personal Health Graph — Manifest
@@ -24,6 +24,7 @@ Schema 0.3.0 · Template release 0.3.0 (August 2026). See CHANGELOG.md for relea
 | DISCLAIMER.md | Legal disclaimers, liability disclosures, assumption of risk |
 | LICENSE | MIT License |
 | CONTRIBUTING.md | Guidelines for community contributions |
+| PHILOSOPHY.md | Why this exists, what I believe, and what this project will never do |
 | CLAUDE.md | Guidance for Claude Code sessions working in this repo |
 | .claude/skills/ | 14 thin SKILL.md wrappers — native Claude Code slash commands pointing at skills/ |
 | .claude/commands/ | Legacy slash-command wrappers (kept one release for backward compatibility) |

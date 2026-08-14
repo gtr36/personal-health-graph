@@ -22,6 +22,7 @@ personal_health_graph/
 ├── DISCLAIMER.md           ← Legal disclaimers and disclosures
 ├── LICENSE                 ← MIT License
 ├── CONTRIBUTING.md         ← Guidelines for community contributions
+├── PHILOSOPHY.md           ← Why this exists and what it will never do
 ├── CHANGELOG.md            ← Release history
 ├── CLAUDE.md               ← Guidance for Claude Code sessions
 ├── .claude/skills/         ← Native Claude Code slash commands (thin wrappers)
@@ -175,6 +176,8 @@ The files are plain markdown. Any LLM that accepts text input can read them. The
 
 **AI-agnostic.** We don't build the intelligence. We make every AI's intelligence more useful by giving it structured context.
 
+The longer version, including what this project will never do, lives in [PHILOSOPHY.md](PHILOSOPHY.md).
+
 ---
 
 ## File types explained
@@ -232,6 +235,26 @@ The value isn't in the folder structure. It's in what happens when a capable LLM
 - Your **doctor prep** pulls from everything — symptoms, labs, journal entries, medications — and produces a structured brief that saves the first 10 minutes of every appointment.
 
 None of this requires a special app. It requires structured data and a good LLM.
+
+---
+
+## What living with it looks like
+
+The setup is the heavy part. After that, this is not a system you work on; it is a system that mostly runs in the background of your life, with a few minutes of attention at the moments where minutes have leverage.
+
+**Most days: nothing.** Your wearable syncs, your life happens, the passive sources accumulate. The graph does not need you.
+
+**When a lab result lands:** drop the PDF in `inbox/`, run INTAKE. Two minutes, and the longitudinal table has the new rows.
+
+**Ten minutes on a Sunday:** run MAINTENANCE. It tells you what went stale, whether an experiment hit its evaluation date, and what is coming up. Most weeks the answer is "everything looks good."
+
+**Before a doctor visit:** run DOCTOR_PREP, or a SPECIALIST_TRANSLATOR brief if it is a specialist. Walk in with the document that replaces the first ten minutes of "so what's been going on?"
+
+**When something feels off:** log it in a sentence, then ask. The answer draws on everything: the sleep data, the medication start dates, the last time this happened.
+
+**When you are curious whether something works:** design an experiment. The evaluation date arrives on its own schedule, with criteria you set before you started.
+
+**Quarterly and annually:** a supplement review each quarter, a risk assessment and health memo each year. Each one reads the last one, so the record compounds.
 
 ---
 

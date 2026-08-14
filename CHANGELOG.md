@@ -2,6 +2,12 @@
 
 All notable changes to the Personal Health Graph template. The `schema_version` in file frontmatter tracks the data schema; releases here track the template as a whole.
 
+## [Unreleased]
+
+### Added
+- PHILOSOPHY.md: why the project exists, the beliefs behind it, and the list of things it will never do
+- README "What living with it looks like": the day-to-day rhythm of an established graph
+
 ## [0.3.0] — 2026-08-14
 
 The epistemics release: try before you commit, test what you find, audit what you conclude. Fully additive — no migration required.

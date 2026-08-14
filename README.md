@@ -328,6 +328,22 @@ Two practices matter for caregivers. First, keep each person's folder clearly na
 
 ---
 
+## If you're building a health company
+
+The substrate problem is solved here, and it is MIT licensed: commercial use is free, no permission needed. If you are building a health product, the schema, the intake methodology, the analysis skills, and the dashboard shell are undifferentiated plumbing you no longer have to design, debate, or maintain. Fork it and ship sooner.
+
+Your differentiation was never going to live in the plumbing. It lives in three places:
+
+- **Novel data collection.** A sensor, assay, or diagnostic that produces a measurement nobody else has. Give it an integration format (a README and a _TEMPLATE, following the pattern of any `integrations/` directory here) and every AI your customer uses can reason over your data alongside everything else about them. Data that lands in a customer's graph is worth more to them than data trapped in your app, and they will know the difference.
+- **Novel interpretation.** Models or clinical expertise that read data only you understand. Ship the methodology as a skill: your analysis, their graph, any AI.
+- **Novel interventions.** The product, service, or care you actually deliver. The graph gives your intervention the longitudinal context that shows whether it works, which is the evidence your retention and your renewals depend on.
+
+What building on an open substrate buys you is the thing you cannot manufacture: trust. "Export your complete data as a Personal Health Graph" is a one-line feature that tells customers they are not hostages, and it costs you nothing if your product is good.
+
+Two norms, not obligations: keep the export path real (a PHG folder that actually works after a customer leaves), and send format improvements upstream so the substrate stays coherent for everyone. The FHIR adapter remains an open invitation.
+
+---
+
 ## Contributing
 
 This schema is open. If you build something useful on top of it — a new skill, a better integration format, a tool that writes to these files — share it. The system gets better as more people use it and refine it.

@@ -2,6 +2,11 @@
 
 All notable changes to the Personal Health Graph template. The `schema_version` in file frontmatter tracks the data schema; releases here track the template as a whole.
 
+## [Unreleased]
+
+### Added
+- README "If you're building a health company": the builders' section — MIT commercial use, where differentiation actually lives (novel data collection, novel interpretation, novel interventions), the export-path trust norm, and the upstream-contribution norm
+
 ## [0.4.0] — 2026-08-14
 
 The visual release: the graph gets a face, without becoming an app.

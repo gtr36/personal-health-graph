@@ -15,8 +15,11 @@ reads:
   - integrations/labs/*.md
   - integrations/genetics/*.md
   - integrations/wearable_daily/*.md
+  - integrations/healthkit/*.md
   - integrations/microbiome/*.md
   - integrations/imaging/*.md
+  - integrations/assessments/*.md
+  - integrations/cycle/*.md
   - DOCTOR_QS.md
   - EXPENSES.md
 default_range: all available data
@@ -142,4 +145,5 @@ Do not try to cover everything. Identify the themes that:
 - This is the highest-effort skill in Personal Health Graph. Read every file before writing.
 - The memo should be readable in 15-20 minutes — roughly 2,500-4,000 words for the body (excluding appendices).
 - If data is sparse (< 90 days, < 2 lab panels, no genetics), state this upfront and adjust the scope accordingly. A shorter, honest memo is better than a padded one.
-- Save the completed memo as a markdown file in the root directory: `HEALTH_MEMO_[YYYY-MM].md`
+- **Account for data-density bias.** Users log most heavily where they are most worried. Dense data in one area reflects attention, not necessarily incidence — weigh themes against logging density, and flag conclusions that may be artifacts of differential logging.
+- Save the completed memo to `reports/health_memo_YYYY-MM-DD.md` (the `saves_to:` location). Reports always go in `reports/`, which the template's `.gitignore` protects from accidental commits. Never save reports to the repo root.

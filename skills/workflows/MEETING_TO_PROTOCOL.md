@@ -10,6 +10,12 @@ reads:
   - PROTOCOLS.md
   - DOCTOR_QS.md
   - LABS_HISTORY.md
+writes:
+  - PROFILE.md (medication changes, new diagnoses)
+  - SUPPLEMENTS.md (additions, dose adjustments, discontinuations)
+  - PROTOCOLS.md (protocol changes log)
+  - DOCTOR_QS.md (visit log, lab orders, carried-forward questions)
+  - LABS_HISTORY.md (new values discussed in visit)
 connectors_required:
   - Granola (meeting transcripts)
 connectors_optional:

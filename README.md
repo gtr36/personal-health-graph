@@ -1,6 +1,6 @@
 # Personal Health Graph (PHG)
 
-**A portable, structured health context system that makes every AI smarter about you.**
+**Your complete health history, structured in one folder you own. Readable by any AI, locked into none.**
 
 > **Important:** Personal Health Graph is an organizational tool, not a medical product. It does not provide medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional before making health decisions. See [DISCLAIMER.md](DISCLAIMER.md) for full terms.
 
@@ -8,7 +8,7 @@ Your health data is scattered across a dozen systems that don't talk to each oth
 
 None of these systems capture the thing that actually matters: how you feel, what you noticed, what changed, and why you think it happened. The qualitative layer — the context that makes all the quantitative data interpretable — lives nowhere today.
 
-Personal Health Graph is a set of structured markdown files that consolidate your complete health picture into one place, readable by any AI. Point Claude, ChatGPT, Gemini, or any LLM at this folder, and it can reason across your full history instead of starting from zero every conversation.
+Personal Health Graph is a set of structured markdown files that consolidate your complete health picture into one place, readable by any AI. Point Claude, ChatGPT, Gemini, or any LLM at this folder, and it can reason across your full history instead of starting from zero every conversation. Think of it as a headless health brain: no app, no server, no subscription. Structured files plus whatever frontier AI you point at them.
 
 ---
 
@@ -22,6 +22,9 @@ personal_health_graph/
 ├── DISCLAIMER.md           ← Legal disclaimers and disclosures
 ├── LICENSE                 ← MIT License
 ├── CONTRIBUTING.md         ← Guidelines for community contributions
+├── CHANGELOG.md            ← Release history
+├── CLAUDE.md               ← Guidance for Claude Code sessions
+├── .claude/skills/         ← Native Claude Code slash commands (thin wrappers)
 ├── .gitignore              ← Protects personal data from accidental commits
 │
 ├── PROFILE.md              ← Demographics, conditions, meds, providers
@@ -76,6 +79,15 @@ personal_health_graph/
 
 ## Quickstart
 
+### Never used a tool like this? Start here.
+
+1. **Get the folder.** Click the green **Code** button on this page, choose **Download ZIP**, and unzip it somewhere you'll find it (your Documents folder is fine). That folder is your health graph — it lives on your computer, and nothing in it ever gets uploaded unless you choose to share it.
+2. **Pick your AI.** Claude (claude.ai, the desktop app, or Claude Code in a terminal) or ChatGPT both work. If you're not sure, Claude's Cowork mode is the easiest: it can open the folder directly and read and write the files for you.
+3. **Let the AI drive.** Point your AI at the folder and say: *"Read skills/QUICKSTART.md and help me set up my Personal Health Graph."* It will walk you through everything from there, one question at a time.
+4. **See your first result.** Once some data is in, say: *"Run skills/BASELINE_REPORT.md."* That first report — where you stand, what's missing, what to do next — is the moment the system starts paying for itself.
+
+The detailed version:
+
 ### Step 1: Gather your files
 
 Before anything else, collect whatever health documents you already have — lab PDFs, genetic reports, wearable exports, medical records, supplement lists, screenshots. Don't organize them. Just drop everything into the `inbox/` folder.
@@ -115,7 +127,7 @@ Run `skills/MAINTENANCE.md` weekly or monthly. It audits file staleness, validat
 Create a new Project in Claude. Add your Personal Health Graph files as project knowledge. Now every conversation in that project has your full health context. Paste a skill file to run structured analysis.
 
 ### Claude (Claude Code / Cowork)
-Point Claude Code at the folder, or select it in Cowork. Claude can read, cross-reference, and analyze all files directly. Skills run natively.
+Point Claude Code at the folder, or select it in Cowork (available on all paid Claude plans). Claude can read, cross-reference, and analyze all files directly, and the wrappers in `.claude/skills/` register every PHG skill natively, so Claude can invoke the right one on its own when your request matches.
 
 ### Claude (CLI)
 From this folder, launch Claude in your terminal and run any skill as a slash command.
@@ -124,10 +136,10 @@ From this folder, launch Claude in your terminal and run any skill as a slash co
 claude
 ```
 
-Then, in the Claude prompt, type `/` to see the full list of available commands (`/intake`, `/quickstart`, `/health_memo`, `/supplement_review`, etc.). Each command is a thin wrapper that executes the canonical skill in `skills/` — so the methodology lives in one place and every AI system can run it the same way.
+Type `/` to see the full list (`/intake`, `/quickstart`, `/health_memo`, `/supplement_review`, and the rest). The commands come from thin wrappers in `.claude/skills/` that point at the canonical skill files in `skills/`, so the methodology lives in one place and every AI system runs the same version. Because the wrappers ship inside the repo, they also load automatically in Claude cloud sessions that clone the folder.
 
 ### ChatGPT
-Upload your key files (PROFILE.md, SUPPLEMENTS.md, LABS_HISTORY.md, GENETICS.md) to a conversation or a Custom GPT. Paste a skill file to run analysis.
+Upload your key files (PROFILE.md, SUPPLEMENTS.md, LABS_HISTORY.md, GENETICS.md) to a conversation or a Custom GPT. Paste a skill file to run analysis. If you use ChatGPT Health's connected records, PHG complements it: your canonical copy stays local and portable, and the same files remain readable by every other AI.
 
 ### Any MCP-compatible AI
 If you have a Personal Health Graph MCP server configured, any MCP-compatible client gets structured read access to your files automatically.
@@ -215,7 +227,7 @@ FHIR (Fast Healthcare Interoperability Resources) is designed for system-to-syst
 
 ### "The skills are just prompts, not code."
 
-Correct. Skills are methodology files — structured natural language instructions that tell an LLM what to read, how to reason, and what to produce. This is intentional: no dependencies, no runtime, no build step, no API keys. A methodology file works with any model that can read text. The tradeoff is that output quality depends on model capability. Skills are optimized for frontier models (Claude, GPT-4-class, Gemini Pro) and may produce weaker results on smaller models.
+Correct. Skills are methodology files — structured natural language instructions that tell an LLM what to read, how to reason, and what to produce. This is intentional: no dependencies, no runtime, no build step, no API keys. A methodology file works with any model that can read text. The tradeoff is that output quality depends on model capability. Skills are optimized for current frontier models (the latest Claude, GPT, and Gemini releases) and may produce weaker results on smaller or older models.
 
 ### "How do you know the output is correct?"
 
@@ -223,7 +235,27 @@ You don't — and the system doesn't claim to. PHG generates structured hypothes
 
 ### "N=1 data can't support causal claims."
 
-Agreed. See the [Methodological Note](SCHEMA.md#methodological-note) in SCHEMA.md. PHG adapts population-level frameworks (Bradford Hill, GRADE, ASCVD) as analytical scaffolding for individual data. Pattern detection identifies candidates for clinical conversation, not confirmed causal relationships. The system includes minimum data thresholds and multiple comparison awareness to reduce false pattern identification.
+Agreed. See the [Methodological Note](SCHEMA.md#methodological-note) in SCHEMA.md. PHG adapts population-level frameworks (Bradford Hill, GRADE, ASCVD) as analytical scaffolding for individual data. Pattern detection identifies candidates for clinical conversation, not confirmed causal relationships. The system includes minimum data thresholds, multiple comparison awareness, and data-density bias checks to reduce false pattern identification.
+
+### "Why not just connect my records to ChatGPT Health or another AI health service?"
+
+Connected-records products are useful, and PHG doesn't ask you to give them up. The difference is where the canonical copy lives. When your records sync into one vendor's account, your health context sits inside that vendor's walls: readable only by that vendor's AI, governed by that vendor's terms, and generally outside HIPAA once connected (consumer AI apps are not covered entities). PHG keeps the canonical copy on your device, in plain markdown any AI can read. Connect vendor products on top when they're useful. You never depend on them, and you take everything with you when you leave.
+
+### "Does this only work with Claude?"
+
+No. The files are plain markdown and the skills are plain-language methodology, so any capable LLM can run the system. Community users have run it end-to-end with GPT models via Cursor. The Claude-specific layer (`.claude/skills/`) is a thin convenience wrapper, not a dependency. One honest cost note: the analysis skills read a lot of context and are at their best on frontier models, so heavy use consumes meaningful tokens on whatever AI subscription you bring.
+
+---
+
+## Known failure modes
+
+Structured data plus a capable LLM is powerful, and it fails in a specific way worth understanding before you rely on it.
+
+**Plausible-but-wrong narratives.** The dangerous errors in AI health analysis are not hallucinations. They are coherent stories built on a single misread fact. One reviewer of this project reported a year-old AI-written genetics summary that misread strand orientation at a single MTHFR position: the genotype was reported as wild-type, and everything downstream (methylation status, supplement plan, lab interpretation) followed logically from the wrong call. The narrative stayed internally consistent for a year. Coherence is not evidence of correctness.
+
+**What the system does about it.** The metadata requirements in GENETICS.md (platform, chip version, genome build, strand orientation) force the assumptions that normally live inside the AI's reasoning to be written down where they can be audited. MASTER_ANALYSIS carries a verification checklist and a Known Pitfalls section built from real production errors. RESEARCH_ENRICHMENT validates claims against primary literature. Triangulation helps most of all: genotype predictions, lab values, and symptoms should converge, and discordance is a signal to re-verify, never a detail to explain away.
+
+**What it cannot do.** Verification checklists catch transcription errors; they are much weaker against coherent wrong narratives, because every downstream fact agrees with the upstream mistake. Anything load-bearing — a finding you would change a medication, supplement, or screening decision over — should be confirmed with clinical-grade testing and reviewed with a clinician before you act on it.
 
 ---
 
@@ -233,7 +265,7 @@ Your health data is sensitive. A few things to keep in mind:
 
 PHG files live on your local device — they're as secure as anything else on your computer. If you use full-disk encryption (FileVault on Mac, BitLocker on Windows), your health files are encrypted at rest. We recommend enabling this if you haven't already.
 
-If you fork this repo and use it as a working copy with git, the `.gitignore` is configured to prevent accidental commits of personal health data (dated entries, filled-in profiles, generated reports). **Always verify before pushing** — run `git status` and review what's staged. If your fork is public, anything you push is visible to the world.
+If you fork this repo and use it as a working copy with git, the `.gitignore` protects dated log entries, integration data files, raw exports, and generated reports from accidental commits. One important exception: the seven state files (PROFILE.md, SUPPLEMENTS.md, and the rest) are tracked templates, so git treats your filled-in edits as normal changes. Before using a fork as a working copy, untrack them first (`git rm --cached PROFILE.md`, then uncomment the matching lines in `.gitignore`). **Always verify before pushing** — run `git status` and review what's staged. If your fork is public, anything you push is visible to the world.
 
 Most users will simply download the ZIP, unzip it, and fill in their data locally — in that case, git is not involved and there's no risk of accidental exposure.
 
@@ -255,6 +287,6 @@ See [DISCLAIMER.md](DISCLAIMER.md) for complete terms, and [LICENSE](LICENSE) fo
 
 ## Credits
 
-Built by [Garrett Ruhland](https://www.linkedin.com/in/garrettruhland/). Born from the frustration of having a decade of health data scattered across a dozen systems, and the realization that the most useful thing I could build for my own health was a set of files on my local drive.
+Built by [Garrett Ruhland](https://www.linkedin.com/in/garrett-ruhland). Born from the frustration of having a decade of health data scattered across a dozen systems, and the realization that the most useful thing I could build for my own health was a set of files on my local drive.
 
 *Doesn't replace your doctor. Makes every AI smarter about you.*

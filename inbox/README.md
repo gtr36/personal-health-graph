@@ -66,7 +66,7 @@ You don't need to organize the files before dropping them here. Name them whatev
 
 **Oura** — Log in to cloud.ouraring.com → Trends → Export (bottom of page). CSV format.
 
-**23andMe** — Settings → 23andMe Data → Download Your Data. You'll get your raw genotype file.
+**23andMe** — find the raw data download under your account settings (currently Settings → 23andMe Data). You'll get your raw genotype file.
 
 **Insurance / pharmacy** — Most pharmacy apps (CVS, Walgreens, Express Scripts) let you view and download medication history. Most insurance portals have EOBs available as PDFs.
 

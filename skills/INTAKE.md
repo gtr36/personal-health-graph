@@ -85,7 +85,7 @@ Process files in this order (dependencies flow downstream):
 5. Supplement info → cross-reference with SUPPLEMENTS.md, flag anything not already listed
 
 **Round 2 — Lab data:**
-3. Lab reports → for each report:
+6. Lab reports → for each report:
    - Create a markdown summary in `integrations/labs/` using the naming convention: `[provider]_[YYYY-MM-DD].md`
    - Follow the template format in `integrations/labs/_TEMPLATE.md`
    - Extract every biomarker with value, unit, reference range, and flag status
@@ -93,33 +93,33 @@ Process files in this order (dependencies flow downstream):
    - Note the source file path in the summary's `source_file` field
 
 **Round 3 — Genetic data:**
-4. Genetic reports and raw data → for each:
+7. Genetic reports and raw data → for each:
    - Create a summary in `integrations/genetics/` if it's a report
    - Extract clinically significant variants and append to `GENETICS.md` (check for duplicates)
    - For raw genotype files (.txt, .vcf): archive to `integrations/raw/genetics/` — these are too large to process inline but should be preserved for future deep-dive analysis
    - Flag any pharmacogenomic variants (CYP2D6, CYP2C19, CYP2C9, CYP3A4, VKORC1, DPYD, TPMT, SLCO1B1, etc.)
 
 **Round 4 — Wearable and HealthKit data:**
-5. Wearable exports → for each:
+8. Wearable exports → for each:
    - Create monthly summary files in `integrations/wearable_daily/` following the template
    - Extract key daily metrics: sleep duration, HRV, RHR, recovery/readiness, strain/activity
    - Note the device and HRV measurement type (RMSSD vs SDNN vs composite) — this is critical
-6. HealthKit exports → for each:
+9. HealthKit exports → for each:
    - Unzip if necessary
    - Create daily aggregate summaries in `integrations/healthkit/`
    - Focus on: steps, active energy, resting heart rate, HRV (SDNN from Apple Watch), sleep analysis
 
 **Round 5 — Imaging and microbiome:**
-7. Imaging reports → create summaries in `integrations/imaging/`
-8. Microbiome reports → create summaries in `integrations/microbiome/`
+10. Imaging reports → create summaries in `integrations/imaging/`
+11. Microbiome reports → create summaries in `integrations/microbiome/`
 
 **Round 6 — Assessments, cycle data, and environmental:**
-9. Assessment scores (PHQ-9, GAD-7, PSQI, etc.) → create scored summaries in `integrations/assessments/` using the template. Update PROFILE.md Mental Health History assessment scores if mental health instruments.
-10. Cycle/fertility data → create monthly summaries in `integrations/cycle/` using the template. Cross-reference any hormonal labs with cycle day if both are available.
-11. Environmental reports (water quality, mold testing, heavy metal testing) → update PROFILE.md Environmental History section. Archive originals to `integrations/raw/environmental/`.
+12. Assessment scores (PHQ-9, GAD-7, PSQI, etc.) → create scored summaries in `integrations/assessments/` using the template. Update PROFILE.md Mental Health History assessment scores if mental health instruments.
+13. Cycle/fertility data → create monthly summaries in `integrations/cycle/` using the template. Cross-reference any hormonal labs with cycle day if both are available.
+14. Environmental reports (water quality, mold testing, heavy metal testing) → update PROFILE.md Environmental History section. Archive originals to `integrations/raw/environmental/`.
 
 **Round 7 — Financial (if present):**
-12. Insurance/billing documents → extract relevant costs, update EXPENSES.md if the user tracks expenses
+15. Insurance/billing documents → extract relevant costs, update EXPENSES.md if the user tracks expenses
 
 ### Phase 3: Archive originals
 

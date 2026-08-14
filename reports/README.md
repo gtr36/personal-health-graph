@@ -23,6 +23,7 @@ Every time you run a skill (SUPPLEMENT_REVIEW, RISK_ASSESSMENT, HEALTH_MEMO, etc
 | SYMPTOM_ANALYSIS | `symptom_analysis_YYYY-MM-DD` | .md | Focused analysis of a specific symptom or cluster |
 | MASTER_ANALYSIS | `master_analysis_YYYY-MM-DD` | .md, .docx | Comprehensive 5-phase analysis across all data |
 | MAINTENANCE | `maintenance_YYYY-MM-DD` | .md | Staleness audit, cross-reference validation, action items |
+| INTAKE | `intake_YYYY-MM-DD` | .md | Processing log of inbox files: what was extracted, where it went, items needing verification |
 
 **Workflow skill outputs:**
 

@@ -219,4 +219,4 @@ For each identified risk, provide evidence-based mitigation:
 - **Polygenic risk scores from consumer platforms are not validated for clinical decision-making.** If referencing them, note this limitation explicitly. Individual variant associations (APOE, Lp(a) genetics, Factor V Leiden) have stronger clinical evidence than composite PRS.
 - **Never overstate genetic risk.** Most genetic variants identified by consumer arrays confer modest relative risk increases (1.1-1.5x). The absolute risk increase depends heavily on baseline risk. A 1.3x relative risk multiplier on a 2% baseline risk is clinically different from the same multiplier on a 15% baseline risk.
 - **CAC score of 0 is the most powerful negative risk reclassifier in cardiology.** If available and recent (< 5 years), it should feature prominently in the assessment.
-- Save the completed report as `RISK_ASSESSMENT_[YYYY-MM].md` in the root directory.
+- Save the completed report to `reports/risk_assessment_YYYY-MM-DD.md` (the `saves_to:` location). Reports always go in `reports/`, which the template's `.gitignore` protects from accidental commits. Never save reports to the repo root.

@@ -32,15 +32,20 @@ Skills are in `skills/*.md` and `skills/workflows/*.md`. To run a skill, read th
 - `skills/workflows/PHYSICIAN_REPORT.md` — PHG analysis → formal physician report
 - `skills/workflows/RESEARCH_ENRICHMENT.md` — validate findings via PubMed/Consensus
 
-### Slash commands (Claude CLI users)
+### Slash commands and native skills (Claude Code)
 
-If you're using Claude in the terminal from this folder, every skill is available as a slash command. The commands live in `.claude/commands/*.md` and are **thin wrappers** — each command file contains only a short pointer that tells Claude to read and execute the canonical skill file in `skills/`. This means:
+Every PHG skill is available as a native Claude Code skill. The wrappers live in `.claude/skills/<name>/SKILL.md` and are **thin pointers** — each contains only a short instruction to read and execute the canonical skill file in `skills/`. This means:
 
 - Running `/intake` is equivalent to reading `skills/INTAKE.md` and executing it
 - Running `/health_memo` is equivalent to reading `skills/HEALTH_MEMO.md` and executing it
 - Running `/physician_report` is equivalent to reading `skills/workflows/PHYSICIAN_REPORT.md` and executing it
+- Claude Code can also auto-invoke a skill when the user's request matches its description
 
-**Single source of truth:** the canonical methodology always lives in `skills/`. Slash command files are pointers, never copies. When a skill is updated, the wrapper does not need to change.
+Because the wrappers are committed to the repo, they also load in Claude cloud sessions that clone this folder. The older `.claude/commands/*.md` wrappers are kept one release for backward compatibility and will be removed; skills take precedence on any name conflict.
+
+**Naming note:** the human-readable methodology directory `skills/` and the Claude-native wrapper directory `.claude/skills/` are different layers. Canonical content lives only in `skills/`.
+
+**Single source of truth:** the canonical methodology always lives in `skills/`. Wrapper files are pointers, never copies. When a skill is updated, the wrapper does not need to change.
 
 ### File modification rules
 
@@ -48,7 +53,7 @@ If you're using Claude in the terminal from this folder, every skill is availabl
 
 **Log files** (`symptoms/YYYY-MM.md`, `journal/YYYY-MM.md`) — append only. Never modify existing entries. One file per month named `YYYY-MM.md`. Copy from the `_TEMPLATE.md` in each directory.
 
-**Integration files** (`integrations/*/`) — create new files per data import. Follow the naming convention `[provider]_[YYYY-MM-DD].md`. Each subdirectory has a README with format guidance.
+**Integration files** (`integrations/*/`) — create new files per data import. Per-event integrations (labs, genetics, imaging, microbiome, assessments) use `[provider]_[YYYY-MM-DD].md`; monthly-rollup integrations (wearable_daily, healthkit, cycle) use `YYYY-MM.md`. Each subdirectory has a README with format guidance.
 
 **Reports** (`reports/`) — write new dated files, never overwrite. Convention: `[type]_YYYY-MM-DD.[ext]`.
 
@@ -90,8 +95,8 @@ Files reference each other via relative file paths in `Linked files:` sections o
 
 ## Contributing
 
-When adding a new skill, follow the established frontmatter format from `SCHEMA.md` — it must include `reads:`, `output_format:`, and an honest `## Important notes` or limitations section. Skills must be AI-agnostic (work with Claude, GPT-4, Gemini). See `CONTRIBUTING.md` for full guidelines.
+When adding a new skill, follow the established frontmatter format from `SCHEMA.md` — it must include `reads:`, `output_format:`, and an honest `## Important notes` or limitations section. Skills must be AI-agnostic (work with any current frontier model: Claude, GPT, Gemini, or anything comparable). See `CONTRIBUTING.md` for full guidelines.
 
-**If you add a new skill**, also add a matching thin wrapper in `.claude/commands/` so Claude CLI users get a slash command for it. The wrapper should be a short pointer file (see existing wrappers for the pattern) — never a duplicate of the skill content.
+**If you add a new skill**, also add a matching thin wrapper at `.claude/skills/<name>/SKILL.md` so Claude Code users get a native slash command for it. The wrapper should be a short pointer file with an auto-trigger `description:` (see existing wrappers for the pattern) — never a duplicate of the skill content.
 
-Never commit real personal health data. The `.gitignore` is configured to protect dated log entries, filled-in profiles, and generated reports, but always verify with `git status` before pushing.
+Never commit real personal health data. The `.gitignore` protects dated log entries, integration data, raw exports, and generated reports — but the seven state files are tracked templates and are NOT protected once filled in. Untrack them (`git rm --cached <file>`) before using a fork as a private working copy, and always verify with `git status` before pushing.

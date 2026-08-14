@@ -68,8 +68,8 @@ This disclaimer may be updated as the project evolves. Users are encouraged to r
 
 ## Contact
 
-This project is maintained by [Garrett Ruhland](https://www.linkedin.com/in/garrettruhland/). For questions or concerns about this disclaimer, reach out via LinkedIn.
+This project is maintained by [Garrett Ruhland](https://www.linkedin.com/in/garrett-ruhland). For questions or concerns about this disclaimer, reach out via LinkedIn.
 
 ---
 
-*Last updated: April 2026*
+*Last updated: August 2026*

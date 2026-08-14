@@ -5,7 +5,7 @@ Results from gut microbiome testing services: Viome, Thorne Gut Health Test, Bio
 
 ## How to structure a microbiome result file
 
-Name the file by provider and date: `viome_2026-03.md`, `biomesight_2025-12.md`
+Name the file by provider and date: `viome_2026-03-10.md`, `biomesight_2025-12-01.md`
 
 ```markdown
 ---

@@ -13,6 +13,10 @@ reads:
   - integrations/genetics/*.md
   - integrations/raw/labs/*.pdf (if deeper extraction needed)
   - integrations/raw/genetics/*.txt (if raw genotype querying needed)
+writes:
+  - LABS_HISTORY.md (populate or verify the longitudinal table, Phase 1)
+  - GENETICS.md (populate or extend variant tables, Phase 2)
+  - SUPPLEMENTS.md (protocol updates the user approves, Phase 5)
 external_context:
   - PubMed / PMC for literature verification
   - ClinVar / dbSNP for variant interpretation

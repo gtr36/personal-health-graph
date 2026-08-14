@@ -21,6 +21,11 @@ writes:
   - EXPENSES.md
   - integrations/labs/*.md
   - integrations/genetics/*.md
+  - integrations/wearable_daily/*.md
+  - integrations/imaging/*.md
+  - integrations/microbiome/*.md
+  - integrations/assessments/*.md
+  - integrations/cycle/*.md
   - symptoms/*.md
   - journal/*.md
 trigger: first time using Personal Health Graph, or when PROFILE.md is empty
@@ -199,6 +204,7 @@ Now that we have health data flowing, capture routines:
   - General health optimization: 23andMe or AncestryDNA (affordable, broad coverage)
   - Deep analysis: Nebula Genomics (whole genome)
   - Pharmacogenomics specifically: clinical PGx panel via provider
+- Note: consumer genetics platforms change ownership and access policies over time. Whatever platform you use, download your raw data file promptly and archive it in integrations/raw/genetics/ (see integrations/genetics/README.md).
 
 #### 3B: Wearable data
 - "Do you use a wearable? WHOOP, Oura Ring, Apple Watch, Garmin, Fitbit?"

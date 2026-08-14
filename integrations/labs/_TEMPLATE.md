@@ -2,12 +2,15 @@
 schema_version: "0.1.0"
 type: integration
 subtype: lab_panel
+tier: summary
 provider: # e.g., Function Health, Quest Diagnostics, LabCorp, PCP
+source: # provider name, e.g., "Function Health"
 draw_date: # YYYY-MM-DD
 report_date: # YYYY-MM-DD
 panel_name: # e.g., "Comprehensive Panel", "Lipid Panel", "Thyroid Panel"
 fasting: # true | false
 source_file: # path to raw PDF in integrations/raw/ (if archived)
+tags: [labs, provider-name, YYYY-MM]
 ---
 
 # Lab Panel — [Provider] — [YYYY-MM-DD]
@@ -15,7 +18,7 @@ source_file: # path to raw PDF in integrations/raw/ (if archived)
 <!--
 HOW TO USE THIS FILE:
 Copy this template and rename by provider and date:
-function_health_2026-02.md, quest_2025-11.md, pcp_annual_2026-01.md, etc.
+function_health_2026-02-15.md, quest_2025-11-03.md, pcp_annual_2026-01-20.md, etc.
 
 See README.md in this directory for full import instructions by provider.
 

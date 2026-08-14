@@ -2,7 +2,7 @@
 schema_version: "0.1.0"
 type: meta
 created: 2026-04-08
-updated: 2026-04-08
+updated: 2026-08-14
 tags: [connectors, mcp, integrations, workflows]
 ---
 
@@ -49,7 +49,8 @@ Connectors that bring data *into* your Personal Health Graph.
 ### Apple HealthKit / Health App
 - **What it provides:** Daily aggregates from Apple Watch and connected devices — steps, heart rate, HRV (SDNN), sleep, blood oxygen, respiratory rate, noise exposure, cardio fitness (VO2 max estimate).
 - **PHG integration:** Populate `integrations/healthkit/` files with daily metrics. Cross-reference with wearable data from other devices.
-- **Setup:** Export from Apple Health app, or use a HealthKit-compatible MCP/API bridge.
+- **Setup:** Export from the Apple Health app, or run a HealthKit-compatible MCP server. Community-built options exist that unify Apple Health with Garmin, WHOOP, Polar, Strava, and other platforms behind one self-hosted MCP server, replacing manual exports with continuous sync — search the MCP registry for current options.
+- **Caution:** community MCP servers handle sensitive health data. Prefer self-hosted deployments and review the project before granting access.
 - **Note:** Apple Watch HRV is SDNN, not RMSSD. See `integrations/wearable_daily/README.md` for why this matters.
 
 ### Apple Reminders
@@ -80,7 +81,7 @@ Connectors that bring data *into* your Personal Health Graph.
 Connectors that provide scientific evidence and clinical data to enhance analysis quality. These turn PHG skills from "smart pattern matching" into "evidence-grounded clinical reasoning."
 
 ### PubMed / PMC
-- **What it provides:** Access to 36M+ biomedical literature citations and full-text articles.
+- **What it provides:** Access to tens of millions of biomedical literature citations and full-text articles.
 - **PHG integration:** Validate supplement efficacy claims, research gene-nutrient interactions, find primary literature for genetic variant interpretations, verify clinical recommendations.
 - **Which skills use it:** MASTER_ANALYSIS (variant interpretation), SUPPLEMENT_REVIEW (evidence grading), RISK_ASSESSMENT (clinical guideline citations), HEALTH_MEMO (hypothesis validation), RESEARCH_ENRICHMENT workflow.
 - **Setup:** Install a PubMed MCP connector or use the NCBI E-utilities API.
@@ -94,7 +95,7 @@ Connectors that provide scientific evidence and clinical data to enhance analysi
 - **Example prompt:** *"For each finding in my HEALTH_MEMO, run a Consensus search to verify the claim. Flag any finding where the scientific consensus contradicts my data-driven hypothesis."*
 
 ### Clinical Trials API (ClinicalTrials.gov)
-- **What it provides:** Registry of 400K+ clinical trials — recruiting status, eligibility criteria, endpoints, sponsors, investigators, results.
+- **What it provides:** Registry of hundreds of thousands of clinical trials — recruiting status, eligibility criteria, endpoints, sponsors, investigators, results.
 - **PHG integration:** Identify relevant trials for conditions or interventions in your profile. Particularly valuable for people with conditions where standard-of-care is evolving or where novel interventions are being studied.
 - **Which skills use it:** RISK_ASSESSMENT (emerging interventions), DOCTOR_PREP (trial options to discuss with physician), RESEARCH_ENRICHMENT workflow.
 - **Setup:** Install the Clinical Trials MCP connector.
@@ -135,6 +136,7 @@ Connectors that push PHG analysis outputs to external tools for action, presenta
 - **PHG integration:** Transform PHG analysis outputs into visual presentations — ideal for physician visits, health coaching sessions, or personal review. Gamma can take the structured data from a DOCTOR_PREP or HEALTH_MEMO output and produce a polished visual document.
 - **Setup:** Install the Gamma MCP connector.
 - **Example prompt:** *"Take my DOCTOR_PREP output for tomorrow's cardiology appointment and create a Gamma presentation: one slide per section, with lab trend charts and key findings highlighted."*
+- **Alternative:** Claude users can also paste DOCTOR_PREP or HEALTH_MEMO output into Claude Design (claude.ai) for a visual one-pager — an in-app surface, no connector required.
 
 ### Linear
 - **What it provides:** Project and issue tracking.
@@ -186,7 +188,7 @@ The real power isn't in any single connector — it's in chaining them. Here are
 
 PHG is designed to be extended. If you use a tool not listed here:
 
-1. **Check for an MCP connector.** Many tools have MCP server implementations. Search the MCP registry.
+1. **Check for an MCP connector.** Many tools have MCP server implementations. Search the official MCP Registry (https://registry.modelcontextprotocol.io) and your AI client's connector directory.
 2. **Determine the category.** Is this tool an input source, a research API, or an output destination?
 3. **Add it to this file** under the appropriate section with: what it provides, how it integrates with PHG, which skills use it, and setup instructions.
 4. **Update relevant skills** if the new connector adds a data source they should read or an output option they should support.

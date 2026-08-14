@@ -73,12 +73,12 @@ Generated analysis output. Every skill and workflow run produces a report stored
 
 ## YAML Frontmatter
 
-Every file includes YAML frontmatter with consistent metadata.
+Data files (state, log, and integration files) include YAML frontmatter with consistent metadata. Meta files (README, documentation) and skill files require only `schema_version` and `type`; the full field set below applies to data files.
 
-### Required fields (all files)
+### Required fields (data files)
 ```yaml
 schema_version: "0.1.0"    # Schema version for forward compatibility
-type: state | log | skill | meta
+type: state | log | integration | skill | meta
 created: ISO 8601 datetime  # When the file was created
 updated: ISO 8601 datetime  # When the file was last modified
 tags: [array, of, tags]     # For search and filtering
@@ -110,9 +110,14 @@ sync_frequency: daily | on-demand | manual
 name: "Skill Name"
 description: "What this skill does"
 reads: [list of files/directories this skill needs]
+writes: [optional — files the skill modifies, for skills that update the graph]
 external_context: [optional external data sources]
+connectors_required: [workflow skills only — connectors that must be present]
+connectors_optional: [workflow skills only — connectors that enhance the run]
 default_range: "90 days"
 output_format: "description of output"
+saves_to: "reports/[type]_YYYY-MM-DD.md — where the output report lands"
+trigger: "optional — when the skill should run"
 ```
 
 ## Intervention Cost Tracking
@@ -169,6 +174,8 @@ PHG adapts established epidemiological and evidence-grading frameworks — Bradf
 
 Pattern detection on one person's data identifies *candidates for clinical conversation*, not confirmed causal relationships. Confidence ratings in skills like PATTERN_DETECTION reflect data consistency and temporal coherence, not statistical significance in the epidemiological sense. The system includes multiple comparison awareness and minimum data thresholds specifically to reduce false pattern identification, but no N=1 analysis can fully eliminate it.
 
+One further limitation deserves explicit attention: **logged data reflects attention, not incidence.** Users log most heavily where they are most worried. An anxiety-dense period over-generates symptom and journal entries; a calm period under-generates them, independent of what was actually happening physiologically. Data density is therefore itself biased toward areas of concern, and that bias propagates into every downstream correlation. Analysis skills are instructed to compare findings against logging-density baselines, to prefer passively captured sources (wearables, scheduled labs) as denominators, and to flag conclusions that may be artifacts of differential logging rather than differential health.
+
 This is a feature of the design, not a limitation to be solved: the goal is structured reasoning that makes health conversations more productive, not autonomous clinical decision-making.
 
 ## Context Window Strategy
@@ -197,6 +204,9 @@ personal_health_graph/
 ├── README.md
 ├── SCHEMA.md
 ├── MANIFEST.md
+├── CHANGELOG.md
+├── CLAUDE.md             (guidance for Claude Code sessions)
+├── .claude/skills/       (thin wrappers: native Claude Code slash commands)
 │
 ├── PROFILE.md
 ├── SUPPLEMENTS.md
@@ -213,17 +223,25 @@ personal_health_graph/
 │
 ├── integrations/
 │   ├── labs/
-│   │   └── README.md
+│   │   ├── README.md
+│   │   └── _TEMPLATE.md
 │   ├── genetics/
 │   │   └── README.md
 │   ├── wearable_daily/
-│   │   └── README.md
+│   │   ├── README.md
+│   │   └── _TEMPLATE.md
 │   ├── healthkit/
 │   │   └── README.md
 │   ├── microbiome/
 │   │   └── README.md
 │   ├── imaging/
 │   │   └── README.md
+│   ├── assessments/
+│   │   ├── README.md
+│   │   └── _TEMPLATE.md
+│   ├── cycle/
+│   │   ├── README.md
+│   │   └── _TEMPLATE.md
 │   └── raw/
 │       └── README.md     (subdirectories created by INTAKE as needed)
 │
@@ -244,6 +262,7 @@ personal_health_graph/
     ├── HEALTH_MEMO.md
     ├── BASELINE_REPORT.md
     ├── RISK_ASSESSMENT.md
+    ├── INTAKE.md
     ├── QUICKSTART.md
     ├── MAINTENANCE.md
     └── workflows/

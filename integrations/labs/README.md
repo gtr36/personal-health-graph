@@ -7,7 +7,7 @@ For a consolidated longitudinal view across all panels, see `LABS_HISTORY.md` in
 
 ## How to structure a lab panel file
 
-Name the file by provider and date: `function_health_2026-02.md`, `quest_2025-11.md`, `pcp_annual_2026-01.md`
+Name the file by provider and date: `function_health_2026-02-15.md`, `quest_2025-11-03.md`, `pcp_annual_2026-01-20.md`
 
 ```markdown
 ---

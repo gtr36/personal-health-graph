@@ -6,6 +6,8 @@ description: Cross-reference symptoms with sleep, supplements, calendar, and wea
 reads:
   - symptoms/*.md
   - integrations/wearable_daily/*.md
+  - integrations/assessments/*.md
+  - integrations/cycle/*.md
   - SUPPLEMENTS.md
   - PROTOCOLS.md
   - journal/*.md
@@ -125,6 +127,11 @@ Apply these principles when analyzing symptom data:
 **Confounders:**
 - Always consider what else might explain the pattern. Poor sleep and high strain often co-occur — is the symptom related to sleep, strain, or both?
 - Note potential confounders for each finding.
+
+**Data-density bias (attention bias):**
+- Logged data reflects attention, not incidence. Users log most where they are most worried, so symptom and journal density is itself biased toward areas of concern.
+- Before reporting a correlation, check whether it could be an artifact of differential logging: were entries dense in that period because more was happening, or because the user was watching more closely?
+- Prefer passively captured sources (wearables, labs) as the denominator when comparing symptomatic and non-symptomatic periods.
 
 ### Important Notes
 - Never provide medical diagnoses. Frame all findings as observed correlations, not causal claims.

@@ -9,6 +9,8 @@ reads:
   - journal/*.md
   - integrations/wearable_daily/*.md
   - integrations/labs/*.md
+  - integrations/assessments/*.md
+  - integrations/cycle/*.md
   - SUPPLEMENTS.md
   - PROTOCOLS.md
   # Voice-captured entries are in journal/*.md with source: voice
@@ -135,6 +137,13 @@ Different pattern types require different minimum data volumes to detect reliabl
 | Cascade patterns | 60+ days | Need multiple cascades to distinguish from coincidence |
 
 If the dataset is insufficient for a pattern type, note this explicitly rather than reporting a spurious finding. "Insufficient data to assess seasonal patterns (only 6 weeks of data)" is more useful than a speculative finding.
+
+**Data-density bias (attention bias):**
+Logged data reflects attention, not incidence. Users log most heavily where they are most worried: an anxiety-dense month over-generates symptom and journal entries, and a calm month under-generates them, independent of what was actually happening in the body. This biases every correlation downstream — the areas with the most data are the areas of greatest concern, not necessarily the areas of greatest signal.
+
+- Before reporting a pattern, compare it against the logging-density baseline: is the "cluster" a cluster of events, or a cluster of attention?
+- Flag any finding where entry density varies sharply across the comparison window.
+- Wearable and lab data are less attention-biased than symptom and journal data (they are captured passively or on a schedule); weight accordingly when sources disagree.
 
 **Multiple comparison correction:**
 When scanning across many potential patterns (which this skill does by design), apply the following discipline:

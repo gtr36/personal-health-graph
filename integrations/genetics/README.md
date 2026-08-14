@@ -56,25 +56,22 @@ tags: [genetics, platform-name]
 ## How to get your data
 
 ### 23andMe
-1. Go to 23andMe.com → Settings → 23andMe Data
-2. Under "Download Your Data," click "Submit Request"
-3. Confirm via email, then download the .txt file
-4. Store in `raw/genetics/`
-5. The raw file can be analyzed by any LLM to extract clinically significant variants
+1. Log in and find the raw data download under your account or data settings (currently Settings, then 23andMe Data, then Download Your Data)
+2. Submit the download request, confirm via email, then download the .txt file
+3. Store in `raw/genetics/`
+4. The raw file can be analyzed by any LLM to extract clinically significant variants
 
-> **Note:** Consumer genetic platforms may change ownership, pricing, or data access policies over time. As a general best practice, download your raw data file as soon as it's available — once you have it locally, it's yours regardless of what happens to the platform. Third-party tools like Promethease, SelfDecode, and Genetic Genie can also analyze raw genotype files from most consumer platforms.
+> **Note:** Consumer genetic platforms may change ownership, pricing, or data access policies over time. As a general best practice, download your raw data file as soon as it's available — once you have it locally, it's yours regardless of what happens to the platform. Archive the file in `integrations/raw/genetics/` promptly; that local archive is the durable copy. Third-party tools like Promethease, SelfDecode, and Genetic Genie can also analyze raw genotype files from most consumer platforms.
 
 ### AncestryDNA
-1. Go to ancestry.com → DNA → Settings
-2. Click "Download Raw DNA Data"
-3. Confirm via email, download the .txt file
-4. Store in `raw/genetics/`
+1. Log in and find the raw data download under your DNA settings (currently DNA, then Settings, then Download Raw DNA Data)
+2. Confirm via email, download the .txt file
+3. Store in `raw/genetics/`
 
 ### Nebula Genomics
-1. Log in at nebula.org
-2. Navigate to Results → Download
-3. Download VCF or report files
-4. Store in `raw/genetics/`
+1. Log in at nebula.org and find the download option in your results or account area (currently Results, then Download)
+2. Download VCF or report files
+3. Store in `raw/genetics/`
 
 ### SelfDecode
 1. Upload your raw genotype file from 23andMe, AncestryDNA, or other platforms

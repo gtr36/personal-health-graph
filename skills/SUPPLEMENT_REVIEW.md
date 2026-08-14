@@ -115,7 +115,7 @@ Active supplements: [count]
 - **Published evidence level:** [A/B/C/D] — [basis]
 - **Form/bioavailability:** [optimal / suboptimal — explain]
 - **Recommendation:** [specific recommendation with rationale]
-- **Next validation point:** [when to reassess — e.g., "recheck 25-OH Vitamin D in Aug 2026"]
+- **Next validation point:** [when to reassess — e.g., "recheck 25-OH Vitamin D in ~3 months"]
 
 ### Interaction Notes
 [Any notable supplement-supplement or supplement-medication interactions]

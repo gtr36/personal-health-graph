@@ -5,7 +5,7 @@ Results from any medical imaging or body composition testing: DEXA scans, MRI, C
 
 ## How to structure an imaging result file
 
-Name the file by type and date: `dexa_2026-01.md`, `cac_score_2025-11.md`, `prenuvo_2026-03.md`
+Name the file by type and date: `dexa_2026-01-15.md`, `cac_score_2025-11-20.md`, `prenuvo_2026-03-08.md`
 
 ```markdown
 ---

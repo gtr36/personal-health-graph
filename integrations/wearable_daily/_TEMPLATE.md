@@ -2,11 +2,14 @@
 schema_version: "0.1.0"
 type: integration
 subtype: wearable_daily
+tier: summary
 period: # YYYY-MM
 device: # e.g., WHOOP 4.0, Oura Gen 3, Apple Watch Ultra 2, Garmin Fenix 7
+source: # e.g., "WHOOP 4.0 (via app export)"
 created: # YYYY-MM-DDTHH:MM:SS±HH:MM
 updated: # YYYY-MM-DDTHH:MM:SS±HH:MM
 entry_count: 0
+tags: [wearable, device-name, YYYY-MM]
 ---
 
 # Wearable Daily — [Month Year]

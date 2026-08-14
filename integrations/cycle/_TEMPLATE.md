@@ -1,6 +1,7 @@
 ---
 schema_version: "0.1.0"
 type: integration
+tier: summary
 period: # YYYY-MM
 source: # Clue, Flo, Natural Cycles, Oura, Apple Health, manual, etc.
 tags: [cycle, menstrual, fertility, YYYY-MM]

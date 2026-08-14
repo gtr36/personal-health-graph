@@ -1,14 +1,14 @@
 ---
 schema_version: "0.1.0"
 created: 2026-04-08
-updated: 2026-04-08
-file_count: 47
+updated: 2026-08-14
+file_count: 76
 ---
 
 # Personal Health Graph — Manifest
 
 ## Schema Version
-0.1.0 (April 2026)
+Schema 0.1.0 · Template release 0.1.1 (August 2026). See CHANGELOG.md for release history.
 
 ## File Index
 
@@ -19,10 +19,14 @@ file_count: 47
 | README.md | Project overview, quickstart guide, usage instructions |
 | SCHEMA.md | Full schema documentation for humans and LLMs |
 | MANIFEST.md | This file. Schema version, file index, file counts |
+| CHANGELOG.md | Release history for the template |
 | CONNECTORS.md | External MCP connectors and APIs catalog (input, research, output) |
 | DISCLAIMER.md | Legal disclaimers, liability disclosures, assumption of risk |
-| LICENSE | MIT License with medical disclaimer addendum |
+| LICENSE | MIT License |
 | CONTRIBUTING.md | Guidelines for community contributions |
+| CLAUDE.md | Guidance for Claude Code sessions working in this repo |
+| .claude/skills/ | 14 thin SKILL.md wrappers — native Claude Code slash commands pointing at skills/ |
+| .claude/commands/ | Legacy slash-command wrappers (kept one release for backward compatibility) |
 | .gitignore | Prevents accidental commits of personal health data |
 
 ### State Files

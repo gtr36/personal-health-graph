@@ -13,8 +13,17 @@ raw/
 ├── healthkit/      ← Apple Health .xml export
 ├── microbiome/     ← Microbiome test report PDFs and data files
 ├── imaging/        ← Radiology reports, DICOM files, scan PDFs
+├── medical/        ← Visit notes, discharge summaries, vaccination records, medication lists
+├── assessments/    ← Original standardized assessment reports (PHQ-9, GAD-7, etc.)
+├── dental/         ← Dental x-rays, periodontal charts, treatment records
+├── vision/         ← Eye exam reports, OCT scans, prescriptions
+├── cycle/          ← Cycle tracking app exports, fertility records
+├── billing/        ← EOBs, itemized bills, HSA/FSA records
+├── environmental/  ← Water quality, mold, air quality, heavy metal reports
 └── other/          ← Anything that doesn't fit above
 ```
+
+Subdirectories are created by INTAKE as needed — the full routing table lives in `skills/INTAKE.md` Phase 3.
 
 ## Purpose
 - **Portability:** If you switch AI tools or analysis methods, the raw data is always available.

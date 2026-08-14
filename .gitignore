@@ -9,9 +9,11 @@
 # ----- Personal data files (NEVER commit these) -----
 
 # Filled-in state files (contain personal health information)
-# These are tracked as blank templates but should not be committed
-# once they contain real data. If you're using this repo as your
-# working copy (not recommended), uncomment these lines:
+# These are tracked as blank templates. IMPORTANT: because they are
+# already tracked, uncommenting the lines below has no effect until
+# you also untrack them: git rm --cached <file> (keeps your local copy).
+# If you're using this repo as your working copy (not recommended),
+# untrack each state file first, then uncomment its line:
 # PROFILE.md
 # SUPPLEMENTS.md
 # PROTOCOLS.md
@@ -42,14 +44,11 @@ integrations/cycle/*.md
 !integrations/*/_TEMPLATE.md
 
 # Raw data exports (often large, always personal)
-integrations/raw/**/*.pdf
-integrations/raw/**/*.csv
-integrations/raw/**/*.json
-integrations/raw/**/*.txt
-integrations/raw/**/*.vcf
-integrations/raw/**/*.bam
-integrations/raw/**/*.gz
-integrations/raw/**/*.zip
+# Everything under integrations/raw/ is ignored regardless of format —
+# PDFs, CSVs, XML exports, images, DICOM, genotype files, all of it.
+# Only the README is tracked.
+integrations/raw/**
+!integrations/raw/README.md
 
 # Generated reports (contain personal analysis)
 # All report files are ignored except the README

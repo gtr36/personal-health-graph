@@ -16,6 +16,10 @@ reads:
   - integrations/healthkit/*.md
   - integrations/microbiome/*.md
   - integrations/imaging/*.md
+  - integrations/assessments/*.md
+  - integrations/cycle/*.md
+  - symptoms/*.md
+  - journal/*.md
   - EXPENSES.md
 default_range: all available data
 output_format: baseline assessment with gap analysis and 90-day roadmap
@@ -53,6 +57,8 @@ Before any analysis, inventory everything that exists and everything that's miss
 | Imaging | None / Available | — | Types? |
 | Supplements | None / Listed / Detailed | — | Doses, timing, brands, rationale? |
 | Protocols | None / Partial / Detailed | — | Exercise, nutrition, sleep documented? |
+| Assessments | None / 1 instrument / Tracked over time | Date range | Which instruments (PHQ-9, GAD-7, PSQI, etc.)? |
+| Cycle tracking | None / Partial / Monthly | Date range | Ovulation markers tracked? (if applicable) |
 
 ### Step 2: Establish baselines
 For every metric with sufficient data (minimum 14 days for wearable data, 1 panel for labs), establish a personal baseline:
@@ -117,7 +123,7 @@ Prioritize gaps by impact:
 ---
 
 ## Data Completeness Score
-[X / 10] — based on how many of the 10 core data sources are populated with usable data.
+[X / 13] — based on how many of the 13 data sources in the Step 1 census are populated with usable data. (Mark cycle tracking N/A rather than missing when it does not apply, and score out of 12.)
 
 [1-2 sentences explaining the score and its implications for analysis quality.]
 
@@ -191,5 +197,5 @@ Prioritize gaps by impact:
 - This skill is designed to be honest about uncertainty. A sparse dataset should produce a short report with a clear gap analysis, not a padded report that overstates confidence.
 - The Data Completeness Score should be genuinely informative — a 3/10 should make the user want to add data, not feel judged.
 - The 90-Day Roadmap is the most actionable section. Make it specific, time-bound, and achievable.
-- Save the completed report as `BASELINE_REPORT_[YYYY-MM].md` in the root directory.
+- Save the completed report to `reports/baseline_report_YYYY-MM-DD.md` (the `saves_to:` location). Reports always go in `reports/`, which the template's `.gitignore` protects from accidental commits. Never save reports to the repo root.
 - Recommend re-running this skill at 6-month intervals or after any major health event.

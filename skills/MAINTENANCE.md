@@ -48,7 +48,12 @@ Read every file's frontmatter (specifically `updated` timestamps and entry dates
 | symptoms/ | < 7 days | 7-30 days | 30-90 days | > 90 days |
 | journal/ | < 7 days | 7-30 days | 30-90 days | > 90 days |
 | integrations/wearable_daily/ | < 7 days | 7-30 days | 30-60 days | > 60 days |
+| integrations/healthkit/ | < 7 days | 7-30 days | 30-60 days | > 60 days |
 | integrations/labs/ | < 90 days | 90-180 days | 180-365 days | > 365 days |
+| integrations/assessments/ | < 45 days | 45-90 days | 90-180 days | > 180 days |
+| integrations/cycle/ | < 45 days | 45-90 days | 90-180 days | > 180 days |
+| integrations/microbiome/ | < 1 year | 1-2 years | 2-3 years | > 3 years |
+| integrations/imaging/ | < 1 year | 1-2 years | 2-3 years | > 3 years |
 | DOCTOR_QS.md | < 30 days | 30-90 days | 90-180 days | > 180 days |
 | EXPENSES.md | < 90 days | 90-180 days | 180-365 days | > 365 days |
 

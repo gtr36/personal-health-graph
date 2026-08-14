@@ -1,9 +1,11 @@
 ---
 schema_version: "0.1.0"
 type: integration
+tier: summary
 instrument: # e.g., PHQ-9, GAD-7, PSQI, ESS, SF-36
 date: # YYYY-MM-DD
 administered_by: # self, provider name, clinical setting
+source: # e.g., self-administered, provider name, screening portal
 tags: [assessment, instrument-name]
 ---
 
